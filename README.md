@@ -1,5 +1,5 @@
 # ADSProject
-## Istruzioni Progetto
+## Istruzioni Prozetto
 Implementare e confrontare due strutture dati:
 - Binary Search Tree **semplici** (non bilanciati)
 - Binary Search Tree **AVL**
@@ -68,12 +68,28 @@ L'algoritmo descritto soddisfa tutti e quattro i requisiti e sarà alla base del
 
 ### Selezione efficiente delle chiavi
 Non fare tanti tentativi "a vuoto" (es.: generare interi casuali finché non si becca quella non presente), questo produrrebbe misurazioni inefficienti.
-Si dovrà, obbligatoriamente, rappresentare gli insiemi di chiavi tramite array. La selezione di una chiave da uno dei due array avviene generando una posizione casuale nell'array e accedendo all'elemento in quella posizione. L'inserimento di una chiave in un array può avvenire in tempo costante scambiando la chiave stessa con 
+Si dovrà, obbligatoriamente, **rappresentare gli insiemi di chiavi tramite array**. La selezione di una chiave da uno dei due array avviene generando una posizione casuale nell'array e accedendo all'elemento in quella posizione. L'inserimento di una chiave in un array può avvenire in tempo costante scambiando la chiave stessa con quella in posizione finale nell'array e incrementando o decrementando un contatore per la dimensione dell'array. 
 
+**Soluzione**:
+1. Dichiarazione di un array `A` di lunghezza $n+1$, assumere che `A[i] = i` per `i = 0, 1, ..., n`.
+2. Dichiarazione di un intero `m`, che delimiti il confine tra le chiavi usate e disponibili. In questo modo:
+   - `A[0..m-1]` contiene le chiavi già inserite nell'albero.
+   - `A[m..n]` contiene le chiavi ancora disponibili, non presenti nell'albero.
+3. Se si volesse selezionare una chiave `k` da inserire, sarebbe sufficiente generare un indice casuale `i` nell'intervallo `[m..n]`, definire `k=A[i]`, scambiare `A[i]` con `A[m]`, e incrementare `m`.
+4. Per l'eliminazione invece, basterebbe generare a caso un indice `i` nell'intervallo `[0..m-1]`, definire `k=A[i]`, scambiare `A[i]` con `A[m]`, e decrementare `m`.
 
+Dunque la gestione delle chiavi è **lineare** in $n$ e ogni selezione di chiave prende un **tempo costante**. 
 
+### Scelta sequenza valori di $n$
+1. Esplorare valori di $n$ nell'intervallo $\{1000, \dots, 1\,000\,000\}$.
+2. All'interno di questo intervallo, **utilizzare una progressione geometrica**, definita da $n_i = \lfloor n_{\min} \cdot c^i \rfloor$ dove $i=0,\dots,99$, mentre $n_{\min}=1000$, poi $n_{\max}=10\,000\,000$ e, infine $c=\left( \frac{n_{\max}}{n_{\min}} \right)^{\frac{1}{99}}$. 
 
+### Statistica delle misure: mediana
+Per ciascun valore di $n$ e per ogni struttura dati, la misurazione produrrà: $t_1, t_2, \dots, t_l$ con $l=100$. Sarà importante usare statistiche robuste per aggregare i dati. Per calcolare la mediana usare: $t^{'}=\{t_i:i=1,\dots, l\}$.
+Riportare questo valore su grafico come funzione della dimensione $n$ dell'albero. Inoltre, bisognerà iterare gli esperimenti al variare di $n$ nel range prescelto (sezione precedente).
 
+### Modalità di consegna del prozetto
+TBD
 
 
 
