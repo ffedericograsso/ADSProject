@@ -86,20 +86,13 @@ Dunque la gestione delle chiavi è **lineare** in $n$ e ogni selezione di chiave
 
 ### Statistica delle misure: mediana
 Per ciascun valore di $n$ e per ogni struttura dati, la misurazione produrrà: $t_1, t_2, \dots, t_l$ con $l=100$. Sarà importante usare statistiche robuste per aggregare i dati. Per calcolare la mediana usare: $t^{'}=\{t_i:i=1,\dots, l\}$.
+
 Riportare questo valore su grafico come funzione della dimensione $n$ dell'albero. Inoltre, bisognerà iterare gli esperimenti al variare di $n$ nel range prescelto (sezione precedente).
 
 ### Modalità di consegna del prozetto
-TBD
+Per gli algoritmi che implementano varianti di BST (AVL e RBT), sono previsti test di verifica automatici. Gli algoritmi devono superare tutti i testi previsti!
 
+Per procedure di misurazione non sono previsti test, le misurazioni devono essere eseguite in locale. I dati ottenuti devono essere raccolti in grafici comparativi e riportate in un PDF (10 pagine).
 
-
-
-
-
-
-
-
-
-
-
-
+> ⚠️ **Nota**:
+> Eventuali approfondimenti svolti e riportati nella relazione possono contribuire a migliorare il voto finale, condizionatamente allo svolgimento completo e corretto delle parti obbligatorie.
