@@ -1,7 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1774773684.94862 "/home/ffedericograsso/Desktop/uni/Algoritmi/Lab/progettoLab/ADSProject/relazione/relazione.tex" "relazione.pdf" "relazione" 1774773688.96964 0
-  "/home/ffedericograsso/.texlive2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1772631836 3636716 04e84812dab349fca331fcd933df511a ""
-  "/home/ffedericograsso/Desktop/uni/Algoritmi/Lab/progettoLab/ADSProject/relazione/relazione.tex" 1774773684.33307 720 75bcd75da8e4e78865bab4af4e750f2b ""
+["pdflatex"] 1776502026.21923 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1776502027.00992 0
+  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1776502025.84334 725 9b3d48f2ef93e78d9a5af232942fc76d ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -182,11 +181,12 @@
   "/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty" 1727642399 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "/usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf" 1770478701 43630 e9fa012910491fe5ae08a72c3c2997a7 ""
-  "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1772461911 5541377 04880c840ca220163a28f1a3af0ee662 ""
-  "/usr/local/texlive/2026/texmf.cnf" 1772461904.3251 455 5b996dcaa0eb4ef14a83b026bc0a008c ""
-  "relazione.aux" 1774773688.64854 162 55205a9e8a8eca30d36afb389b0617bf "pdflatex"
-  "relazione.out" 1774773687.76055 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "relazione.tex" 1774773684.33307 720 75bcd75da8e4e78865bab4af4e750f2b ""
+  "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1773840949 5541377 04880c840ca220163a28f1a3af0ee662 ""
+  "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1773840802 3636771 0bdf5bda6577df08d0d1ea5546312a14 ""
+  "/usr/local/texlive/2026/texmf.cnf" 1772409725 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
+  "relazione.aux" 1776502026.92658 162 55205a9e8a8eca30d36afb389b0617bf "pdflatex"
+  "relazione.out" 1776502026.73422 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "relazione.tex" 1776502025.84334 725 9b3d48f2ef93e78d9a5af232942fc76d ""
   (generated)
   "relazione.aux"
   "relazione.log"
