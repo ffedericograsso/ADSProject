@@ -6,3 +6,4 @@
 # VS Code files
 .vscode/
 *.code-workspace
+.DS_Store
