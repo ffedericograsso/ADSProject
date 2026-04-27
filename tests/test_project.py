@@ -3,7 +3,7 @@ import unittest
 from AVL import AVL, TreeNode as AVLNode
 from BST import BST, TreeNode as BSTNode
 from RBT import RBTree, TreeNode as RBTNode
-from project import Project
+from Project import Project
 
 
 class TestProject(unittest.TestCase):
