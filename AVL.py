@@ -17,15 +17,15 @@ class TreeNode:
             right.parent = self
 
 #height calcola l'altezza di un nodo, memorizzandola per evitare ricalcoli ridondanti. Se l'altezza è già calcolata, la restituisce direttamente.   
-    def height(node):
-        if node == None:
-            return 0
-        if getattr(node, "height", None) is None:
-            node.height = 1 + max(height(node.left), height(node.right))
-        return node.height
+def height(node):
+    if node == None:
+        return 0
+    if getattr(node, "height", None) is None:
+        node.height = 1 + max(height(node.left), height(node.right))
+    return node.height
 
 #invalidate_height invalida l'altezza di un nodo e di tutti i suoi antenati, forzando il ricalcolo dell'altezza quando necessario.
-    def invalidate_height(node):
+def invalidate_height(node):
         while node != None:
             node.height = None
             node = node.parent
