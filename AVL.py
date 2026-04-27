@@ -1,4 +1,11 @@
+# Implementazione di un albero AVL, che estende un albero binario di ricerca (BST) con bilanciamento automatico.
+# class TreeNode rappresenta un nodo generico dell'albero, con chiave, puntatori a sinistra e destra, e un puntatore al genitore.
+# La classe AVL estende la classe BST.
+from platform import node
+
+
 class TreeNode:
+    # Inizializza un nodo con una chiave e opzionalmente con figli sinistro e destro. Imposta anche il puntatore al genitore.
     def __init__(self, key, left = None, right = None):
         self.key = key
         self.left = left
@@ -9,28 +16,34 @@ class TreeNode:
         if right is not None:
             right.parent = self
 
-def height(node):
-    if node == None:
-        return 0
-    if getattr(node, "height", None) is None:
-        node.height = 1 + max(height(node.left), height(node.right))
-    return node.height
+#height calcola l'altezza di un nodo, memorizzandola per evitare ricalcoli ridondanti. Se l'altezza è già calcolata, la restituisce direttamente.   
+    def height(node):
+        if node == None:
+            return 0
+        if getattr(node, "height", None) is None:
+            node.height = 1 + max(height(node.left), height(node.right))
+        return node.height
 
-def invalidate_height(node):
-    while node != None:
-        node.height = None
-        node = node.parent
+#invalidate_height invalida l'altezza di un nodo e di tutti i suoi antenati, forzando il ricalcolo dell'altezza quando necessario.
+    def invalidate_height(node):
+        while node != None:
+            node.height = None
+            node = node.parent
 
+#La classe BST implementa un albero binario di ricerca con operazioni di inserimento, rimozione, rotazione e ricerca. La classe AVL estende BST aggiungendo il bilanciamento automatico dopo ogni inserimento o rimozione, garantendo che l'albero rimanga bilanciato.
 class BST:
+    #init inizializza l'albero con una radice opzionale.
     def __init__(self, root = None):
         self.root = root
     
+    #str fornisce una rappresentazione stringa dell'albero, mostrando la chiave di ogni nodo e i suoi figli.
     def __str__(self):
         if self.root == None:
             return "NULL "
         else:
             return f"{self.root.key} " + BST(self.root.left).__str__() + BST(self.root.right).__str__()
 
+    #find cerca un nodo con una chiave specifica nell'albero, restituendo il nodo se trovato o None se non presente.
     def find(self, key):
         if self.root is None:
             return None
@@ -41,7 +54,7 @@ class BST:
         else:
             return BST(self.root.right).find(key)
         
-
+    #nxt restituisce il nodo successore di un dato nodo, ovvero il nodo con la chiave più piccola maggiore di quella del nodo dato.
     def nxt(self, node):
         if node is None:
             return None
@@ -54,13 +67,14 @@ class BST:
                 node = parent
                 parent = parent.parent
             return parent
-
+        
+    #min restituisce il nodo con la chiave più piccola in un sottoalbero dato.
     def min(self, node):
         while node.left is not None:
             node = node.left
         return node
-    
 
+    #prv restituisce il nodo predecessore di un dato nodo, ovvero il nodo con la chiave più grande minore di quella del nodo dato.
     def prv(self, node):
         if node is None:
             return None
@@ -74,11 +88,13 @@ class BST:
                 parent = parent.parent
             return parent
 
+    #max restituisce il nodo con la chiave più grande in un sottoalbero dato.
     def max(self, node):
         while node.right is not None:
             node = node.right
         return node
-
+    
+    #insert aggiunge un nuovo nodo all'albero, mantenendo la proprietà di albero binario di ricerca.
     def insert(self, node):
         y = None
         x = self.root
@@ -96,6 +112,7 @@ class BST:
         else:
             y.right = node
 
+    #remove elimina un nodo dall'albero, mantenendo la proprietà di albero binario di ricerca. Gestisce i casi in cui il nodo da rimuovere ha due figli, un solo figlio o nessun figlio.
     def remove(self, node):
         if node.left is not None and node.right is not None:
             successor = self.nxt(node)
@@ -129,6 +146,7 @@ class BST:
             else:
                 node.parent.right = None
 
+    #rotate_right esegue una rotazione a destra attorno a un nodo specificato, modificando la struttura dell'albero per mantenere le proprietà di bilanciamento.
     def rotate_right(self, node):
         if node.left is None:
             return
@@ -163,7 +181,7 @@ class BST:
         right.left = node
         node.parent = right
 
-
+# La classe AVL estende la classe BST, aggiungendo funzionalità per mantenere l'albero bilanciato dopo ogni inserimento o rimozione. Utilizza le funzioni height e invalidate_height per gestire l'altezza dei nodi e la funzione rebalance per eseguire le rotazioni necessarie per mantenere l'equilibrio dell'albero.
 class AVL(BST):
     def __init__(self, root = None):
         super().__init__(root)
@@ -178,6 +196,7 @@ class AVL(BST):
         invalidate_height(node)
         self.rebalance(node.parent)
 
+    #rebalance controlla l'equilibrio dell'albero a partire da un nodo specificato e esegue le rotazioni necessarie per mantenere l'albero bilanciato. Gestisce i casi di sbilanciamento a sinistra e a destra, identificando i pivot e i figli coinvolti nelle rotazioni.
     def rebalance(self, node):
         while node is not None:
             balance = height(node.left) - height(node.right)

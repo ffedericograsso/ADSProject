@@ -1,3 +1,4 @@
+#TreeNode rappresenta un nodo generico dell'albero, con chiave, puntatori a sinistra e destra, e un puntatore al genitore.
 class TreeNode:
     def __init__(self, key, left = None, right = None):
         self.key = key
@@ -9,7 +10,8 @@ class TreeNode:
         if right is not None:
             right.parent = self
 
-
+#BST implementa un albero binario di ricerca con operazioni di inserimento, rimozione, rotazione e ricerca. La classe AVL estende BST aggiungendo il bilanciamento automatico dopo ogni inserimento o rimozione, garantendo che l'albero rimanga bilanciato.
+#Guardare AVL per vedere i commenti sulle funzioni di bilanciamento e gestione dell'altezza.
 class BST:
     
     def __init__(self, root = None):

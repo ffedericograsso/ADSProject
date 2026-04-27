@@ -1,14 +1,4 @@
-class TreeNode:
-    def __init__(self, key, left = None, right = None):
-        self.key = key
-        self.left = left
-        self.right = right
-        self.parent = None
-        if left is not None:
-            left.parent = self
-        if right is not None:
-            right.parent = self
-
+#color restituisce il colore di un nodo, restituendo "black" se il nodo è None o se non ha un attributo "color". Altrimenti, restituisce il valore dell'attributo "color" del nodo.
 def color(node):
     return getattr(node, "color", "black") if node != None else "black"
 
@@ -23,7 +13,7 @@ class TreeNode:
         if right is not None:
             right.parent = self
 
-
+#guardare AVL per vedere i commenti sulle funzioni di bilanciamento e gestione dell'altezza.
 class BST:
     def __init__(self, root = None):
         self.root = root
@@ -166,6 +156,7 @@ class BST:
         right.left = node
         node.parent = right
 
+#RBTree estende BST implementando un albero rosso-nero, che mantiene le proprietà di bilanciamento attraverso l'uso di colori (rosso e nero) e operazioni di rotazione. Le funzioni fix_insert e fix_remove garantiscono che le proprietà dell'albero rosso-nero siano mantenute dopo ogni inserimento o rimozione.
 class RBTree(BST):
     def __init__(self, root = None):
         super().__init__(root)
@@ -175,6 +166,7 @@ class RBTree(BST):
         node.color = "red"
         self.fix_insert(node)
 
+    #remove rimuove un nodo dall'albero, gestendo i casi di nodi con due figli, un solo figlio o nessun figlio. Se il nodo rimosso è nero, chiama fix_remove per mantenere le proprietà dell'albero rosso-nero.
     def remove(self, node):
         if node.left is not None and node.right is not None:
             successor = self.nxt(node)
@@ -195,6 +187,7 @@ class RBTree(BST):
         if node.color == "black":
             self.fix_remove(child, node.parent)
     
+    #fix_insert garantisce che le proprietà dell'albero rosso-nero siano mantenute dopo l'inserimento di un nodo. Gestisce i casi in cui il genitore del nodo inserito è rosso, eseguendo rotazioni e cambiamenti di colore per mantenere l'equilibrio dell'albero.
     def fix_insert(self, node):
         while node != self.root and color(node.parent) == "red":
             if node.parent == node.parent.parent.left:
@@ -226,7 +219,8 @@ class RBTree(BST):
                     node.parent.parent.color = "red"
                     self.rotate_left(node.parent.parent)
         self.root.color = "black"
-
+        
+    #fix_remove garantisce che le proprietà dell'albero rosso-nero siano mantenute dopo la rimozione di un nodo. Gestisce i casi in cui il nodo rimosso è nero, eseguendo rotazioni e cambiamenti di colore per mantenere l'equilibrio dell'albero.
     def fix_remove(self, node, parent):
         while node != self.root and color(node) == "black":
             if node == parent.left:
