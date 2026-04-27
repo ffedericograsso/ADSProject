@@ -5,10 +5,14 @@ from BST import BST, TreeNode as BSTNode
 from RBT import RBTree, TreeNode as RBTNode
 from Project import Project
 
-# Per runnare usare: `python3 -m unittest discover -s tests -v`
+'''
+Per lanciare i test usare: `python3 -m unittest discover -s tests -v`
 
-# test_project.py contiene unit test per la classe Project, verificando che l'inizializzazione, la creazione di nodi, e le modifiche alla struttura funzionino correttamente.
-# I test coprono sia l'accettazione di nomi di strutture che di classi, e assicurano che vengano sollevate eccezioni per input non validi.
+Questo file contiene unit test per la classe Project, verificando che l'inizializzazione, la creazione di nodi, e le modifiche alla struttura funzionino correttamente.
+I test coprono sia l'accettazione di nomi di strutture che di classi, e assicurano che vengano sollevate eccezioni per input non validi.
+'''
+
+# 
 class TestProject(unittest.TestCase):
 
     # Verifica che la classe Project accetti correttamente i nomi delle strutture come stringhe e che inizializzi gli alberi e le fabbriche di nodi corrispondenti.
