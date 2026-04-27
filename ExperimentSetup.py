@@ -1,5 +1,6 @@
 import math
 from KeyManager import KeyManager
+from Project import Project
 
 # Setup dell'esperimento
 class ExperimentSetup:
@@ -30,14 +31,15 @@ class ExperimentSetup:
 	
 	# -- Inizializzazione Algoritmo --
 	# Restituisce l'albero popolato e il KeyManager pronto con l'ultima chiave
-	def experiment_tree_setup(self, tree_class, n):
-		tree = tree_class()
+	def experiment_tree_setup(self, project: Project):
+		tree = project.tree
 
-		key_manager = KeyManager(n)
+		key_manager = KeyManager(project.n)
 
 		# Popolazione iniziale
-		for _ in range(n):
+		for _ in range(project.n):
 			random_key = key_manager.get_key_insert()
+			node_to_insert = project.create_node(random_key)
 			tree.insert(random_key)
 
 		# Ora:
