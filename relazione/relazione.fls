@@ -1,8 +1,8 @@
-PWD /Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione
+PWD /home/ffedericograsso/Desktop/uni/Algoritmi/Lab/progettoLab/ADSProject/relazione
 INPUT /usr/local/texlive/2026/texmf.cnf
 INPUT /usr/local/texlive/2026/texmf-dist/web2c/texmf.cnf
-INPUT /usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex
+INPUT /home/ffedericograsso/.texlive2026/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /home/ffedericograsso/Desktop/uni/Algoritmi/Lab/progettoLab/ADSProject/relazione/relazione.tex
 OUTPUT relazione.log
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
