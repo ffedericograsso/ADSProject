@@ -1,3 +1,5 @@
+import random
+
 '''
 IDEA:
 1. Dichiarazione di un array A di lunghezza n+1, assumere che A[i] = i per i = 0, 1, ..., n.
@@ -7,7 +9,6 @@ IDEA:
 3. Se si volesse selezionare una chiave k da inserire, sarebbe sufficiente scegliere un indice i causale nell'intervallo [m..n], definire k=A[i] con A[m] e incrementare m di 1.
 4. Per rimuovere una chiave k, basterebbe generare a caso un indice i nell'intervallo [0..m-1], definire k=A[i], scambiare A[i] con A[m] e decrementare m di 1.
 '''
-import random
 
 class KeyManager:
     def __init__(self, n):
@@ -49,4 +50,3 @@ class KeyManager:
     
     def get_available_keys(self):
         return self.A[self.m:]
-

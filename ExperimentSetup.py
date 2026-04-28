@@ -12,7 +12,7 @@ class ExperimentSetup:
 
 	# -- Calcolo progressione geometrica -- 
 	# Calcola e restituisce la lista dei valori n generati dalla progressione
-	def _calculate_n_progr(self):
+	def calculate_n_progr(self):
 		n_list = []
 
 		# Caso base
@@ -40,7 +40,7 @@ class ExperimentSetup:
 		for _ in range(project.n):
 			random_key = key_manager.get_key_insert()
 			node_to_insert = project.create_node(random_key)
-			tree.insert(random_key)
+			tree.insert(node_to_insert)
 
 		# Ora:
 		# - L'albero ha n nodi

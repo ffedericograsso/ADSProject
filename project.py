@@ -2,6 +2,8 @@ from BST import BST as SimpleBST, TreeNode as BSTNode
 from AVL import AVL, TreeNode as AVLNode
 from RBT import RBTree, TreeNode as RBTNode
 
+# Questa classe funge da centro di controllo e intermediario tra le strutture dati e i file di esperimento
+
 class Project:
 	def __init__(self, structure, n):
 		self.structure_name = self._normalize_structure(structure)
@@ -27,12 +29,12 @@ class Project:
 			if structure is RBTree:
 				return "RBT"
 
-		raise ValueError("structure must be BST, AVL or RBT")
+		raise ValueError("La struttura dati può essere solamente BST, AVL o RBT")
 
 	# Si assicura che il valore n sia un intero strettamente positivo
 	def _validate_n(self, n):
 		if not isinstance(n, int) or n <= 0:
-			raise ValueError("n must be a positive integer")
+			raise ValueError("n deve essere un intero positivo")
 		return n
 
 	# Crea gli alberi in base al nome della struttura
