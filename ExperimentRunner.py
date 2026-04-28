@@ -2,7 +2,6 @@ import time
 from ExperimentSetup import ExperimentSetup
 from Project import Project
 
-
 # Runner dell'esperimento
 class ExperimentRunner:
 	def __init__(self, setup_config: ExperimentSetup):
