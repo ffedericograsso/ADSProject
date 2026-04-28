@@ -1,5 +1,6 @@
 from ExperimentSetup import ExperimentSetup
 from ExperimentRunner import ExperimentRunner
+from Plotter import ResultPlotter
 
 def main():
     print("Inizializzazione del setup degli esperimenti...")
@@ -9,13 +10,12 @@ def main():
     runner = ExperimentRunner(setup, n_exp=10)
     runner.run_experiments()
     
-    print("Esperimenti completati! Risultati:\n (TBD)")
+    print("Esperimenti completati! Risultati:\n")
     risultati = runner.get_results()
 
-    for tree_name, data in risultati.items():
-        print(f"\n{tree_name}:")
-        print(f"  Valori (N):\t{data['X']}")
-        print(f"  Tempi ({len(data['Y'])}):\t{[f'{t:.7f}' for t in data['Y']]}")
+    print("Plot del grafico:\n")
+    plotter = ResultPlotter(risultati)
+    plotter.plot_time_complexity()
 
 if __name__ == "__main__":
     main()
