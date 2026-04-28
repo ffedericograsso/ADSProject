@@ -26,7 +26,7 @@ class KeyManager:
 
         # Scambia A[i] con A[m] e incrementa m di 1
         self.A[i], self.A[self.m] = self.A[self.m], self.A[i]
-        self.m -= 1
+        self.m += 1
 
         return k
     
@@ -40,7 +40,7 @@ class KeyManager:
 
 
         # Scambia A[i] con A[m-1] e decremento m
-        self.m += 1
+        self.m -= 1
         self.A[i], self.A[self.m] = self.A[self.m], self.A[i]
 
         return k

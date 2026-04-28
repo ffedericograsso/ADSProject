@@ -8,7 +8,7 @@ class ExperimentSetup:
 		self.min_n = min_n
 		self.max_n = max_n
 		self.steps = steps
-		self.n_values = self._calculate_n_progr()
+		self.n_values = self.calculate_n_progr()
 
 	# -- Calcolo progressione geometrica -- 
 	# Calcola e restituisce la lista dei valori n generati dalla progressione
