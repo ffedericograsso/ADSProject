@@ -1,7 +1,7 @@
 import time
 import statistics
 from ExperimentSetup import ExperimentSetup
-from Project import Project
+from project import Project
 
 # Runner dell'esperimento
 class ExperimentRunner:
