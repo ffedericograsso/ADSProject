@@ -11,10 +11,11 @@ def main():
     runner.run_experiments()
     
     print("Esperimenti completati! Risultati:\n")
-    risultati = runner.get_results()
+    csv_file = "esperimenti_risultati.csv"
+    runner.export_to_csv(csv_file)
 
     print("Plot del grafico:\n")
-    plotter = ResultPlotter(risultati)
+    plotter = ResultPlotter(csv_file)
     plotter.plot_time_complexity()
 
 if __name__ == "__main__":

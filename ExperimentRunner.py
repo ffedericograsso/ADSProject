@@ -1,5 +1,6 @@
 import time
 import statistics
+import csv
 from ExperimentSetup import ExperimentSetup
 from Project import Project
 
@@ -58,3 +59,14 @@ class ExperimentRunner:
 
 	def get_results(self):
 		return self.results
+	
+	def export_to_csv(self, filename="tempi.csv"):
+		with open(filename, mode='w', newline='') as file:
+			writer = csv.writer(file)
+			writer.writerow(["Tree", "N", "Mediana tempo (s)"])
+
+			for tree_name, data in self.results.items():
+				for n, time_val in zip(data["X"], data["Y"]):
+					writer.writerow([tree_name, n, time_val])
+
+		print("\n Risultati salvati in {filename}")
