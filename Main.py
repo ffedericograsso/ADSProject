@@ -13,8 +13,7 @@ def main():
     print("Esperimenti completati! Risultati:\n")
     csv_file = "esperimenti_risultati.csv"
     runner.export_to_csv(csv_file)
-
-    print("Plot del grafico:\n")
+    
     plotter = ResultPlotter(csv_file)
     plotter.plot_time_complexity()
 
