@@ -44,14 +44,14 @@ class ExperimentRunner:
 
 					partial_insert_times.append(duration)
 
-					print(f"		Misurazione {i+1}: Inserita chiave {available_key} in {duration:.8f} secondi")
+					print(f"	Misurazione {i+1}: Inserita chiave {available_key} in {duration:.8f} secondi")
 
 					key_to_remove = key_manager.get_key_remove()
 					node_to_remove = tree.find(key_to_remove)
 					tree.remove(node_to_remove)
 
 				median_time = statistics.median(partial_insert_times)
-				print(f" -> [{tree_name}] MEDIANA DEI TEMPI per N={n}: {median_time:.8f} secondi\n")
+				print(f"	MEDIANA DEI TEMPI per N={n}: {median_time:.8f} secondi\n")
 
 				self.results[tree_name]["X"].append(n)
 				self.results[tree_name]["Y"].append(median_time)
