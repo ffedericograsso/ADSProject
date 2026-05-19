@@ -1,6 +1,6 @@
 import math
 from KeyManager import KeyManager
-from Project import Project
+from project import Project
 
 # Setup dell'esperimento
 class ExperimentSetup:

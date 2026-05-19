@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 class ResultPlotter:
-    def __init__(self, filename="results.csv"):
+    def __init__(self, filename="esperimenti_risultati.csv"):
         self.filename = filename
         self.results = {
             "BST": {"X": [], "Y": []},
@@ -57,3 +57,7 @@ class ResultPlotter:
         print("\n=> Generazione grafico completata! Chiudi la finestra per terminare il programma.")
         plt.tight_layout()
         plt.show()
+
+if __name__ == "__main__":
+    plotter = ResultPlotter()
+    plotter.plot_time_complexity()
