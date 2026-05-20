@@ -6,7 +6,6 @@ def main():
     print("Inizializzazione del setup degli esperimenti...")
     setup = ExperimentSetup(min_n=1000, max_n=10000000, steps=100)
     
-    print("Avvio dell'esperimento...")
     runner = ExperimentRunner(setup, n_exp=10)
     runner.run_experiments()
     

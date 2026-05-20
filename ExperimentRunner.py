@@ -21,7 +21,7 @@ class ExperimentRunner:
 
 		# Iterazione su tutti i valori di N del setup
 		for j, n in enumerate(self.setup.n_values):
-			print(f"ESPERIMENTO {j+1}/{len(self.setup.n_values)} - Dimensione N = {n}...")
+			print(f"{j+1}% - Dimensione N = {n}...")
 
 			for tree_name in trees_to_test:
 				print(f" [{tree_name}]")
