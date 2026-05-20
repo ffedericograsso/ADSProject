@@ -1,8 +1,9 @@
 import time
 import statistics
 import csv
+import gc
 from ExperimentSetup import ExperimentSetup
-from project import Project
+from Project import Project
 
 # Runner dell'esperimento
 class ExperimentRunner:
@@ -37,9 +38,13 @@ class ExperimentRunner:
 					available_key = key_manager.get_key_insert()
 					node_to_insert = project.create_node(available_key)
 
+					gc.disable()
+
 					start = time.perf_counter()
 					tree.insert(node_to_insert)
 					stop = time.perf_counter()
+
+					gc.enable()
 
 					duration = stop - start
 
