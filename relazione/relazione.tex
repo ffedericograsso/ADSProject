@@ -25,23 +25,11 @@
 \begin{document}
 \maketitle
 
-\begin{tikzpicture}
-
-\begin{axis}[
-    axis lines = left,
-    xlabel = $x$,
-    ylabel = {$f(x)$},
-]
-
-% Tracciamento di una funzione
-\addplot [
-    domain=-10:10, 
-    samples=100, 
-    color=red,
-]
-{x^2 - 2*x + 1};
-\addlegendentry{$x^2 - 2x + 1$}
-\end{axis}
-\end{tikzpicture}
-
+\section{Introduzione}
+L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST) e Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
+\section{Misurazione}
+Per la misurazione abbiamo utilizzato metodi come per esempio perf_counter() per misurare il tempo di esecuzione dell'inserimento di chiavi in alberi BST, AVL e RB. Abbiamo eseguito più iterazioni per ogni valore di n per ottenere stime robuste dei tempi di esecuzione. Abbiamo anche utilizzato grafici per visualizzare i risultati e confrontare le prestazioni dei diversi tipi di alberi. I grafici mostrano il tempo medio di inserimento in funzione del numero di chiavi presenti nell'albero, evidenziando le differenze tra BST, AVL e RB.
+\section{Opzione C}
+Come opzione abbiamo scelto la C, dove l'idea è quella di costruire, per ciascun valore di n, un albero di dimensione n e applicare su questo una sequenza di operazioni di inserimento e cancellazione che mantengano l'albero bilanciato. In questo modo, possiamo osservare come le prestazioni di inserimento variano in un contesto dinamico, dove l'albero subisce modifiche continue. Questo approccio ci permette di valutare non solo il tempo di inserimento, ma anche l'efficienza complessiva dell'albero nel mantenere la sua struttura bilanciata durante le operazioni di inserimento e cancellazione.
+\section{Algoritmo}
 \end{document}  

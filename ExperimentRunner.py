@@ -1,3 +1,4 @@
+import gc
 import time
 import statistics
 from ExperimentSetup import ExperimentSetup
@@ -55,6 +56,11 @@ class ExperimentRunner:
 
 				self.results[tree_name]["X"].append(n)
 				self.results[tree_name]["Y"].append(median_time)
+
+				del tree
+			del project
+			del key_manager
+			gc.collect()
 
 	def get_results(self):
 		return self.results
