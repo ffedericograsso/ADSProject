@@ -1,5 +1,5 @@
 %FILE IN LATEX DOVE VERRÀ SCRITTA LA RELAZIONE
-\documentclass[12pt]{article}
+\documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -20,21 +20,48 @@
     \small{173731}
 }
 
-\date{II semestre 2026}
+\date{Algoritmi e Strutture Dati - 2026}
 
 \begin{document}
 \maketitle
 
-\section{Introduzione}
+\section*{Introduzione}
 L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
-\section{Misurazione}
+
+\section*{Richiami Teorici}
+Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
+\begin{itemize}
+    \item \textbf{BST Semplice:} Non garantisce alcun bilanciamento. Nel caso peggiore può degenerare in $\mathcal{O}(n)$, portando a tempi di inserimento lineari.
+
+    \item \textbf{Alberi AVL:} Mantengono un bilanciamento stretto garantendo che la differenza di altezza tra i sotto-alberi di ogni nodo sia al massimo 1. Nel caso peggiore vengono assicurati tempi asintotici $\mathcal{O}(\log n)$ al costo di frequenti rotazioni strutturali.
+
+    \item \textbf{Alberi Red-Black:} Utilizzando colorazioni per i nodi viene garantita una complessità $\Theta(\log n)$. Sebbene il cammino massimo possa essere leggermente più lungo rispetto a un AVL, il RBT richiede tipicamente meno operazioni di rotazione per ripristinare le proprietà dopo un inserimento.
+\end{itemize}
+
+\section*{Metodologia}
+Per garantire misurazioni robuste e stabili, il progetto si basa su due pilastri:
+\subsubsection*{Varietà Morfologica}
+Invece di 
+\begin{enumerate}
+    \item Selezionare una chiave non ancora presente e se ne misura l'inserimento tramite \texttt{time.perf\_counter()}.
+    \item Estrarre casualmente una chiave dall'albero e la si rimuove \textit{senza cronometrare} l'operazione.
+\end{enumerate}
+Questa tecnica garantisce che prima di ogni inserimento (e dunque prima che il cronometro parta), la dimensione torna sempre a essere esattamente $n$. Inoltre la continua eliminazione e reinserimento di nodi altera in modo casuale la topologia della struttura dati, garantendo che le misurazioni avvengano su albero con forme uniformemente distribuite.
+\subsubsection*{Struttura del Progetto}
+Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di programmazione ad oggetti:
+\begin{itemize}
+    \item \textbf{Codici delle Strutture Dati}: I file \texttt{BST.py}, \texttt{AVL.py} e \texttt{RBT.py} contengono i codici completi delle strutture dati. In particolare nei codici delle ultime due strutture dati il codice è stato alleggerito riciclando alcune parti del codice da \texttt{BST.py}.
+    \item \textbf{KeyManager}: Questo file implementa un partizionamento di un array, garantendo la selezione di chiavi libere e occupate in un tempo 
+\end{itemize}
+
+
+\section*{Misurazione}
 Per la misurazione abbiamo utilizzato metodi come, per esempio, \texttt{perf\_counter()} per misurare il tempo di esecuzione dell'inserimento di chiavi in alberi BST, AVL e RB. Abbiamo eseguito più iterazioni per ogni valore di $n$ per ottenere stime robuste dei tempi di esecuzione. Abbiamo anche utilizzato grafici per visualizzare i risultati e confrontare le prestazioni dei diversi tipi di alberi. I grafici mostrano il tempo medio di inserimento in funzione del numero di chiavi presenti nell'albero, evidenziando le differenze tra BST, AVL e RB.
-\section{Opzione C}
-Come opzione abbiamo scelto la C, dove l'idea è quella di costruire, per ciascun valore di n, un albero di dimensione n e applicare su questo una sequenza di operazioni di inserimento e cancellazione che mantengano l'albero bilanciato. In questo modo, possiamo osservare come le prestazioni di inserimento variano in un contesto dinamico, dove l'albero subisce modifiche continue. Questo approccio ci permette di valutare non solo il tempo di inserimento, ma anche l'efficienza complessiva dell'albero nel mantenere la sua struttura bilanciata durante le operazioni di inserimento e cancellazione.
-\subsection{Algoritmo}
+
+\subsection*{Algoritmo}
 Il progetto implementa un sistema di misurazione delle prestazioni per tre diverse strutture dati ad albero: Alberi Binari di Ricerca (BST), Alberi AVL e Alberi Rosso-Nero (RBT). L'obiettivo è quantificare il tempo di inserimento di una chiave in ciascun tipo di albero al variare della dimensione dell'albero stesso.
 
-\subsection{Struttura del Progetto}
+\subsection*{Struttura del Progetto}
 Il progetto è organizzato nei seguenti moduli:
 \begin{itemize}
     \item \textbf{ExperimentSetup}: Configura i parametri dell'esperimento, calcolando una progressione geometrica di valori di $n$ da testare (da 1000 a 10.000.000 elementi) e inizializzando gli alberi con $n$ chiavi casuali.
@@ -44,7 +71,7 @@ Il progetto è organizzato nei seguenti moduli:
     \item \textbf{Plotter}: Visualizza i risultati degli esperimenti tramite grafici.
 \end{itemize}
 
-\subsection{Algoritmo di Misurazione}
+\subsection*{Algoritmo di Misurazione}
 Per ogni valore di $n$ nella progressione geometrica, l'algoritmo esegue i seguenti passi:
 \begin{enumerate}
     \item Inizializzazione: Viene creato un albero vuoto (BST, AVL o RBT).
@@ -58,7 +85,7 @@ Per ogni valore di $n$ nella progressione geometrica, l'algoritmo esegue i segue
     \item Calcolo della mediana: Viene calcolata la mediana dei 10 tempi di inserimento misurati, che rappresenta una stima robusta delle prestazioni.
 \end{enumerate}
 
-\subsection{Caratteristiche Implementative}
+\subsection*{Caratteristiche Implementative}
 \begin{itemize}
     \item \textbf{Progressione geometrica}: I valori di $n$ sono generati secondo una progressione geometrica per coprire uniformemente lo spazio logaritmico tra il minimo e il massimo.
     \item \textbf{Bilanciamento dinamico}: AVL e RBT mantengono automaticamente il bilanciamento dell'albero dopo ogni inserimento e rimozione.
