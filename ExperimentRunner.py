@@ -1,8 +1,10 @@
 import gc
 import time
 import statistics
+import csv
+import gc
 from ExperimentSetup import ExperimentSetup
-from project import Project
+from Project import Project
 
 # Runner dell'esperimento
 class ExperimentRunner:
@@ -20,7 +22,7 @@ class ExperimentRunner:
 
 		# Iterazione su tutti i valori di N del setup
 		for j, n in enumerate(self.setup.n_values):
-			print(f"ESPERIMENTO {j+1}/{len(self.setup.n_values)} - Dimensione N = {n}...")
+			print(f"{j+1}% - Dimensione N = {n}...")
 
 			for tree_name in trees_to_test:
 				print(f" [{tree_name}]")
@@ -37,22 +39,26 @@ class ExperimentRunner:
 					available_key = key_manager.get_key_insert()
 					node_to_insert = project.create_node(available_key)
 
+					gc.disable()
+
 					start = time.perf_counter()
 					tree.insert(node_to_insert)
 					stop = time.perf_counter()
+
+					gc.enable()
 
 					duration = stop - start
 
 					partial_insert_times.append(duration)
 
-					print(f"		Misurazione {i+1}: Inserita chiave {available_key} in {duration:.8f} secondi")
+					print(f"	Misurazione {i+1}: Inserita chiave {available_key} in {duration:.8f} secondi")
 
 					key_to_remove = key_manager.get_key_remove()
 					node_to_remove = tree.find(key_to_remove)
 					tree.remove(node_to_remove)
 
 				median_time = statistics.median(partial_insert_times)
-				print(f" -> [{tree_name}] MEDIANA DEI TEMPI per N={n}: {median_time:.8f} secondi\n")
+				print(f"	MEDIANA DEI TEMPI per N={n}: {median_time:.8f} secondi\n")
 
 				self.results[tree_name]["X"].append(n)
 				self.results[tree_name]["Y"].append(median_time)
@@ -64,3 +70,14 @@ class ExperimentRunner:
 
 	def get_results(self):
 		return self.results
+	
+	def export_to_csv(self, filename="tempi.csv"):
+		with open(filename, mode='w', newline='') as file:
+			writer = csv.writer(file)
+			writer.writerow(["Tree", "N", "Mediana tempo (s)"])
+
+			for tree_name, data in self.results.items():
+				for n, time_val in zip(data["X"], data["Y"]):
+					writer.writerow([tree_name, n, time_val])
+
+		print("\n Risultati salvati in {filename}")

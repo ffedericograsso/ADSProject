@@ -1,8 +1,27 @@
 import matplotlib.pyplot as plt
+import csv
 
 class ResultPlotter:
-    def __init__(self, results_data):
-        self.results = results_data
+    def __init__(self, filename="esperimenti_risultati.csv"):
+        self.filename = filename
+        self.results = {
+            "BST": {"X": [], "Y": []},
+            "AVL": {"X": [], "Y": []},
+            "RBT": {"X": [], "Y": []}
+        }
+        self._load_from_csv()
+
+    def _load_from_csv(self):
+        with open(self.filename, mode='r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                tree_name = row["Tree"]
+                n = float(row["N"])
+                median_time = float(row["Mediana tempo (s)"])
+                
+                if tree_name in self.results:
+                    self.results[tree_name]["X"].append(n)
+                    self.results[tree_name]["Y"].append(median_time)
 
     def plot_time_complexity(self):
         # Imposta la grandezza della finestra del grafico
@@ -38,3 +57,7 @@ class ResultPlotter:
         print("\n=> Generazione grafico completata! Chiudi la finestra per terminare il programma.")
         plt.tight_layout()
         plt.show()
+
+if __name__ == "__main__":
+    plotter = ResultPlotter()
+    plotter.plot_time_complexity()

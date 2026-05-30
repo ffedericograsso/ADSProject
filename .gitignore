@@ -11,3 +11,14 @@
 __pycache__/
 *.pyc
 
+__pycache__/ExperimentRunner.cpython-314.pyc
+__pycache__/ExperimentSetup.cpython-314.pyc
+__pycache__/Plotter.cpython-314.pyc
+__pycache__/AVL.cpython-314.pyc
+__pycache__/BST.cpython-314.pyc 
+__pycache__/ExperimentRunner.cpython-314.pyc 
+__pycache__/ExperimentSetup.cpython-314.pyc 
+__pycache__/KeyManager.cpython-314.pyc 
+__pycache__/Plotter.cpython-314.pyc 
+__pycache__/Project.cpython-314.pyc 
+__pycache__/RBT.cpython-314.pyc
