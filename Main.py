@@ -8,12 +8,11 @@ def main():
     
     runner = ExperimentRunner(setup, n_exp=10)
     runner.run_experiments()
-    
-    print("Esperimenti completati! Risultati:\n")
-    risultati = runner.get_results()
 
-    print("Plot del grafico:\n")
-    plotter = ResultPlotter(risultati)
+    nome_file = "esperimenti_risultati.csv"
+    runner.export_to_csv(nome_file)
+
+    plotter = ResultPlotter(nome_file)
     plotter.plot_time_complexity()
 
 if __name__ == "__main__":
