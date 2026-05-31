@@ -13,16 +13,15 @@ class TreeNode:
 #BST implementa un albero binario di ricerca con operazioni di inserimento, rimozione, rotazione e ricerca. La classe AVL estende BST aggiungendo il bilanciamento automatico dopo ogni inserimento o rimozione, garantendo che l'albero rimanga bilanciato.
 #Guardare AVL per vedere i commenti sulle funzioni di bilanciamento e gestione dell'altezza.
 class BST:
-    
     def __init__(self, root = None):
         self.root = root
-        self.rotation_count = 0
     
     def __str__(self):
         if self.root == None:
             return "NULL "
         else:
             return f"{self.root.key} " + BST(self.root.left).__str__() + BST(self.root.right).__str__()
+        self.rotation_count = 0
 
     def find(self, key):
         if self.root is None:
@@ -123,6 +122,7 @@ class BST:
                 node.parent.right = None
 
     def rotate_right(self, node):
+        self.rotation_count = getattr(self, 'rotation_count', 0) + 1
         if node.left is None:
             return
         left = node.left
@@ -138,9 +138,9 @@ class BST:
             node.parent.right = left
         left.right = node
         node.parent = left
-        self.rotation_count += 1
 
     def rotate_left(self, node):
+        self.rotation_count = getattr(self, 'rotation_count', 0) + 1
         if node.right is None:
             return
         right = node.right
@@ -156,4 +156,3 @@ class BST:
             node.parent.right = right
         right.left = node
         node.parent = right
-        self.rotation_count += 1

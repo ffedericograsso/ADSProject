@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1780267674.01082 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1780267675.04981 0
-  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1780267673.83355 8625 3098c41e5178d5cfa2d93ca090903648 ""
+["pdflatex"] 1780269544.5359 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1780269545.78903 0
+  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1780269542.83718 9817 ea60e46b878cb7602c7195a72b559736 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -204,9 +204,10 @@
   "/usr/local/texlive/2026/texmf.cnf" 1772409725 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
   "grafico_curve_logaritmiche.png" 1780265416.89537 226562 ddb9a8f360e26dfb0897af95b9d88d72 ""
   "grafico_misurazioni_Stefano.png" 1780261470.48279 88567 bfb7ab603841720d07be2f200a977323 ""
-  "relazione.aux" 1780267674.98751 162 59504cb8f8bee0a3f0488d753cb23a1e "pdflatex"
-  "relazione.out" 1780267674.49836 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "relazione.tex" 1780267673.83355 8625 3098c41e5178d5cfa2d93ca090903648 ""
+  "grafico_rotazioni.png" 1780268653.19827 194524 72c07651aa37842967afc6de837a48bb ""
+  "relazione.aux" 1780269545.72672 1458 7705c93a2d980d6b339e2bb267a0db0d "pdflatex"
+  "relazione.out" 1780269545.72726 1523 3047b501f96a9d3d075bb7f398d6dcb2 "pdflatex"
+  "relazione.tex" 1780269542.83718 9817 ea60e46b878cb7602c7195a72b559736 ""
   (generated)
   "relazione.aux"
   "relazione.log"

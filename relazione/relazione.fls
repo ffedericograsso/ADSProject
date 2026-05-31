@@ -276,10 +276,10 @@ INPUT ./relazione.out
 INPUT ./relazione.out
 INPUT relazione.out
 INPUT relazione.out
+OUTPUT relazione.pdf
 INPUT ./relazione.out
 INPUT ./relazione.out
 OUTPUT relazione.out
-OUTPUT relazione.pdf
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2026/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
@@ -332,6 +332,11 @@ INPUT ./grafico_curve_logaritmiche.png
 INPUT ./grafico_curve_logaritmiche.png
 INPUT ./grafico_curve_logaritmiche.png
 INPUT ./grafico_curve_logaritmiche.png
+INPUT ./grafico_rotazioni.png
+INPUT ./grafico_rotazioni.png
+INPUT ./grafico_rotazioni.png
+INPUT ./grafico_rotazioni.png
+INPUT ./grafico_rotazioni.png
 INPUT relazione.aux
 INPUT ./relazione.out
 INPUT ./relazione.out

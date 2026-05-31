@@ -26,10 +26,10 @@
 \begin{document}
 \maketitle
 
-\subsection*{Introduzione}
+\subsection{Introduzione}
 L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
 
-\subsection*{Richiami Teorici}
+\subsection{Richiami Teorici}
 Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
 \begin{itemize}
     \item \textbf{BST Semplice:} Non garantisce alcun bilanciamento. Nel caso peggiore può degenerare in $\mathcal{O}(n)$, portando a tempi di inserimento lineari.
@@ -39,7 +39,7 @@ Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del ca
     \item \textbf{Alberi Red-Black:} Utilizzando colorazioni per i nodi viene garantita una complessità $\Theta(\log n)$. Sebbene il cammino massimo possa essere leggermente più lungo rispetto a un AVL, il RBT richiede tipicamente meno operazioni di rotazione per ripristinare le proprietà dopo un inserimento.
 \end{itemize}
 
-\subsection*{Struttura del Progetto}
+\subsection{Struttura del Progetto}
 Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di programmazione ad oggetti:
 \begin{itemize}
     \item \textbf{Codici delle Strutture Dati}: I file \texttt{BST.py}, \texttt{AVL.py} e \texttt{RBT.py} contengono i codici completi delle strutture dati. In particolare nei codici delle ultime due strutture dati il codice è stato alleggerito riciclando alcune parti del codice da \texttt{BST.py}.
@@ -48,7 +48,7 @@ Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di progra
     \item \textbf{Experiment Setup \& Runner}: \texttt{ExperimentSetup.py} genera la sequenza di dimensioni $N$ basata su una progressione geometrica di valori di $n$ da testare (da 1000 a 10.000.000 elementi) e si occupa del riempimento iniziale dell'albero. Mentre \texttt{ExperimentRunner.py} implementa l'effettivo ciclo di misurazione e calcolando la mediana finale.
 \end{itemize}
 
-\subsection*{Algoritmo}
+\subsection{Algoritmo}
 Per ciascun valore di $n$ identificato dalla progressione geometrica, e per ogni struttura dati analizzata, il processo di misurazione si articola rigorosamente nei seguenti passi:
 
 \begin{enumerate}
@@ -72,10 +72,10 @@ Questa specifica tecnica a coppie di \textit{insert-remove} garantisce il soddis
     \item \textbf{Varietà Morfologica}: La continua espulsione e reinserimento di chiavi casuali altera costantemente e dinamicamente la topologia dei rami, modificando la struttura. In questo modo, le misurazioni avvengono su una famiglia di alberi le cui forme sono uniformemente distribuite nello spazio degli alberi possibili di dimensione $n$, evitando casi degeneri.
 \end{itemize}
 \clearpage
-\subsection*{Risultati e Analisi}
+\subsection{Risultati e Analisi}
 In seguito presentate e discusse le misurazioni eseguite in locale su MacBook Air M3 (con 16Gb di RAM), poi raccolti all'interno di un file in formato CSV ed elaborati all'interno di grafici.
 
-\subsubsection*{Grafico Principale}
+\subsubsection{Grafico Principale}
 Il grafico mostra il comportamento delle strutture dati nel caso medio, dove le chiavi vengono inserite con distribuzione casuale uniforme grazie al \texttt{KeyManager}.
 
 \begin{figure}[htbp]
@@ -91,7 +91,7 @@ Dall'osservazione della figura, si nota:
     \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio complessivo, pesano sul tempo complessivo.
 \end{itemize}
 
-\subsubsection*{Grafico dell'analisi asintotica}
+\subsubsection{Grafico dell'analisi asintotica}
 Il grafico mostra, come il precedente, il comportamento delle tre strutture dati in seguito all'inserimento casuale di chiavi.
 
 \begin{figure}[htbp]
@@ -107,6 +107,23 @@ Dall'osservazione della figura, si nota:
     \item \textbf{Divergenza dell'AVL}: Si nota invece che la progressione associata all'albero AVL, inizialmente sale molto più velocemente rispetto alle altre due strutture dati, per poi stabilizzarsi attorno a $1,1 \cdot 10^{-5}$ secondi. Questo dimostra graficamente che i vincoli dell'AVL rendono più difficile l'efficientamento.
 \end{itemize}
 
-\subsubsection*{Grafico 3}
+\subsubsection{Grafico Rotazioni Cumulative}
+Il grafico mostra il costo strutturale rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di $N$ durante il popolamento casuale uniforme.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafico_rotazioni.png}
+\end{figure}
+
+Dall'osservazione della figura, si nota:
+\begin{itemize}
+    \item \textbf{Assenza di rotazioni nel BST}: La progressione del BST0 rimane costantemente ancorata allo zero per tutta la durata del test. L'algoritmo non esegue alcuna rotazione, confermando l'assenza totale di manutenzione nel caso medio.
+    \item \textbf{Costo di bilanciamento dell'AVL rispetto al RBT}: L'albero AVL mostra una pendenza superiore rispetto alla variante Red-Black. A causa del vincolo sulle altezze, ogni operazione di inserimento ha un'alta probabilità di innescare riequilibri. Al contrario, l'albero Red-Black gestisce gran parte delle violazioni strutturali tramite la ricolorazione logica dei nodi (operazione molto più leggera per la CPU), ricorrendo alle rotazioni dei nodi con una frequenza inferiore.
+\end{itemize}
+
+\subsubsection{Grafico Caso Pessimo}
+
+
+\subsection{Conclusioni}
 
 \end{document}  
