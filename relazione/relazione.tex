@@ -9,6 +9,13 @@
 \usepackage{geometry}
 \usepackage{pgfplots}
 \usepackage{float}
+\usepackage{titlesec}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
 
 \pgfplotsset{compat=1.18}
 \geometry{a4paper, margin=1in}
@@ -26,10 +33,10 @@
 \begin{document}
 \maketitle
 
-\subsection{Introduzione}
+\section{Introduzione}
 L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
 
-\subsection{Richiami Teorici}
+\section{Richiami Teorici}
 Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
 \begin{itemize}
     \item \textbf{BST Semplice:} Non garantisce alcun bilanciamento. Nel caso peggiore può degenerare in $\mathcal{O}(n)$, portando a tempi di inserimento lineari.
@@ -39,7 +46,7 @@ Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del ca
     \item \textbf{Alberi Red-Black:} Utilizzando colorazioni per i nodi viene garantita una complessità $\Theta(\log n)$. Sebbene il cammino massimo possa essere leggermente più lungo rispetto a un AVL, il RBT richiede tipicamente meno operazioni di rotazione per ripristinare le proprietà dopo un inserimento.
 \end{itemize}
 
-\subsection{Struttura del Progetto}
+\section{Struttura del Progetto}
 Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di programmazione ad oggetti:
 \begin{itemize}
     \item \textbf{Codici delle Strutture Dati}: I file \texttt{BST.py}, \texttt{AVL.py} e \texttt{RBT.py} contengono i codici completi delle strutture dati. In particolare nei codici delle ultime due strutture dati il codice è stato alleggerito riciclando alcune parti del codice da \texttt{BST.py}.
@@ -48,7 +55,7 @@ Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di progra
     \item \textbf{Experiment Setup \& Runner}: \texttt{ExperimentSetup.py} genera la sequenza di dimensioni $N$ basata su una progressione geometrica di valori di $n$ da testare (da 1000 a 10.000.000 elementi) e si occupa del riempimento iniziale dell'albero. Mentre \texttt{ExperimentRunner.py} implementa l'effettivo ciclo di misurazione e calcolando la mediana finale.
 \end{itemize}
 
-\subsection{Algoritmo}
+\section{Algoritmo}
 Per ciascun valore di $n$ identificato dalla progressione geometrica, e per ogni struttura dati analizzata, il processo di misurazione si articola rigorosamente nei seguenti passi:
 
 \begin{enumerate}
@@ -72,10 +79,10 @@ Questa specifica tecnica a coppie di \textit{insert-remove} garantisce il soddis
     \item \textbf{Varietà Morfologica}: La continua espulsione e reinserimento di chiavi casuali altera costantemente e dinamicamente la topologia dei rami, modificando la struttura. In questo modo, le misurazioni avvengono su una famiglia di alberi le cui forme sono uniformemente distribuite nello spazio degli alberi possibili di dimensione $n$, evitando casi degeneri.
 \end{itemize}
 \clearpage
-\subsection{Risultati e Analisi}
+\section{Risultati e Analisi}
 In seguito presentate e discusse le misurazioni eseguite in locale su MacBook Air M3 (con 16Gb di RAM), poi raccolti all'interno di un file in formato CSV ed elaborati all'interno di grafici.
 
-\subsubsection{Grafico Principale}
+\subsection{Grafico Principale}
 Il grafico mostra il comportamento delle strutture dati nel caso medio, dove le chiavi vengono inserite con distribuzione casuale uniforme grazie al \texttt{KeyManager}.
 
 \begin{figure}[htbp]
@@ -91,7 +98,7 @@ Dall'osservazione della figura, si nota:
     \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio complessivo, pesano sul tempo complessivo.
 \end{itemize}
 
-\subsubsection{Grafico dell'analisi asintotica}
+\subsection{Grafico dell'analisi asintotica}
 Il grafico mostra, come il precedente, il comportamento delle tre strutture dati in seguito all'inserimento casuale di chiavi.
 
 \begin{figure}[htbp]
@@ -107,8 +114,9 @@ Dall'osservazione della figura, si nota:
     \item \textbf{Divergenza dell'AVL}: Si nota invece che la progressione associata all'albero AVL, inizialmente sale molto più velocemente rispetto alle altre due strutture dati, per poi stabilizzarsi attorno a $1,1 \cdot 10^{-5}$ secondi. Questo dimostra graficamente che i vincoli dell'AVL rendono più difficile l'efficientamento.
 \end{itemize}
 
-\subsubsection{Grafico Rotazioni Cumulative}
-Il grafico mostra il costo strutturale rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di $N$ durante il popolamento casuale uniforme.
+\subsection{Grafico Rotazioni Cumulative}
+Per la stampa di questo grafico l'inserimento è stato limitato alle chiavi $[100, 500, 1000, 2500, 5000, 7500, 10000]$. Viene mostrato il costo strutturale rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di $N$ durante il popolamento casuale uniforme.
+Si nota che 
 
 \begin{figure}[htbp]
     \centering
@@ -117,13 +125,24 @@ Il grafico mostra il costo strutturale rappresentato come numero totale cumulati
 
 Dall'osservazione della figura, si nota:
 \begin{itemize}
-    \item \textbf{Assenza di rotazioni nel BST}: La progressione del BST0 rimane costantemente ancorata allo zero per tutta la durata del test. L'algoritmo non esegue alcuna rotazione, confermando l'assenza totale di manutenzione nel caso medio.
+    \item \textbf{Assenza di rotazioni nel BST}: La progressione del BST rimane costantemente ancorata allo zero per tutta la durata del test. L'algoritmo non esegue alcuna rotazione, confermando l'assenza totale di manutenzione nel caso medio.
     \item \textbf{Costo di bilanciamento dell'AVL rispetto al RBT}: L'albero AVL mostra una pendenza superiore rispetto alla variante Red-Black. A causa del vincolo sulle altezze, ogni operazione di inserimento ha un'alta probabilità di innescare riequilibri. Al contrario, l'albero Red-Black gestisce gran parte delle violazioni strutturali tramite la ricolorazione logica dei nodi (operazione molto più leggera per la CPU), ricorrendo alle rotazioni dei nodi con una frequenza inferiore.
 \end{itemize}
 
-\subsubsection{Grafico Caso Pessimo}
+\subsection{Grafico Caso Pessimo}
+Per la stampa di questo grafico, come per il precedente, l'inserimento è stato limitato alle chiavi $[100, 500, 1000, 2500, 5000, 7500, 10000]$. Vengono mostrati i tempi di inserimento delle suddette chiavi pre-ordinate all'interno delle tre strutture dati.
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafico_caso_pessimo.png}
+\end{figure}
 
-\subsection{Conclusioni}
+Dall'osservazione della figura, si nota:
+\begin{itemize}
+    \item \textbf{Collasso prestazionale del BST}: La progressione del BST devia con una pendenza marcatamente lineare verso l'alto già a ridosso di poche migliaia di nodi. Privo di logiche di riequilibrio, l'albero subisce passivamente l'ordinamento dell'input inserendo ogni chiave come figlio destro della precedente. La struttura degenera a tutti gli effetti in una lista concatenata, portando l'altezza a $h = \mathcal{O}(n)$, confermando il limite della struttura dati non bilanciata.
+    \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come il Red-Black si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni rigide.
+\end{itemize}
+
+\section{Conclusioni}
 
 \end{document}  

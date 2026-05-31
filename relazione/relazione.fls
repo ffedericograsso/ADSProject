@@ -258,6 +258,8 @@ INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryplo
 INPUT /usr/local/texlive/2026/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/titlesec/titlesec.sty
+INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/titlesec/titlesec.sty
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/local/texlive/2026/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT ./relazione.aux
@@ -337,6 +339,11 @@ INPUT ./grafico_rotazioni.png
 INPUT ./grafico_rotazioni.png
 INPUT ./grafico_rotazioni.png
 INPUT ./grafico_rotazioni.png
+INPUT ./grafico_caso_pessimo.png
+INPUT ./grafico_caso_pessimo.png
+INPUT ./grafico_caso_pessimo.png
+INPUT ./grafico_caso_pessimo.png
+INPUT ./grafico_caso_pessimo.png
 INPUT relazione.aux
 INPUT ./relazione.out
 INPUT ./relazione.out
