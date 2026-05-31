@@ -25,10 +25,10 @@
 \begin{document}
 \maketitle
 
-\section*{Introduzione}
+\subsection*{Introduzione}
 L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
 
-\section*{Richiami Teorici}
+\subsection*{Richiami Teorici}
 Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
 \begin{itemize}
     \item \textbf{BST Semplice:} Non garantisce alcun bilanciamento. Nel caso peggiore può degenerare in $\mathcal{O}(n)$, portando a tempi di inserimento lineari.
@@ -38,58 +38,74 @@ Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del ca
     \item \textbf{Alberi Red-Black:} Utilizzando colorazioni per i nodi viene garantita una complessità $\Theta(\log n)$. Sebbene il cammino massimo possa essere leggermente più lungo rispetto a un AVL, il RBT richiede tipicamente meno operazioni di rotazione per ripristinare le proprietà dopo un inserimento.
 \end{itemize}
 
-\section*{Metodologia}
-Per garantire misurazioni robuste e stabili, il progetto si basa su due pilastri:
-\subsubsection*{Varietà Morfologica}
-Invece di 
-\begin{enumerate}
-    \item Selezionare una chiave non ancora presente e se ne misura l'inserimento tramite \texttt{time.perf\_counter()}.
-    \item Estrarre casualmente una chiave dall'albero e la si rimuove \textit{senza cronometrare} l'operazione.
-\end{enumerate}
-Questa tecnica garantisce che prima di ogni inserimento (e dunque prima che il cronometro parta), la dimensione torna sempre a essere esattamente $n$. Inoltre la continua eliminazione e reinserimento di nodi altera in modo casuale la topologia della struttura dati, garantendo che le misurazioni avvengano su albero con forme uniformemente distribuite.
-\subsubsection*{Struttura del Progetto}
+\subsection*{Struttura del Progetto}
 Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di programmazione ad oggetti:
 \begin{itemize}
     \item \textbf{Codici delle Strutture Dati}: I file \texttt{BST.py}, \texttt{AVL.py} e \texttt{RBT.py} contengono i codici completi delle strutture dati. In particolare nei codici delle ultime due strutture dati il codice è stato alleggerito riciclando alcune parti del codice da \texttt{BST.py}.
-    \item \textbf{KeyManager}: Questo file implementa un partizionamento di un array, garantendo la selezione di chiavi libere e occupate in un tempo 
+    \item \textbf{KeyManager}: Questo file implementa la gestione controllata delle chiavi tramite il partizionamento di un array, garantendo la selezione di chiavi esterne all'albero e occupate (interne) in un tempo $\mathcal{O}(1)$.
+    \item \textbf{Project}: Il file \texttt{Project.py} segue il Design Pattern \textit{Factory}, utilizzato nella programmazione ad oggetti. Questo file consente di configurare comodamente il tipo di albero tramite stringhe identificative ("BST", "AVL", "RBT").
+    \item \textbf{Experiment Setup \& Runner}: \texttt{ExperimentSetup.py} genera la sequenza di dimensioni $N$ basata su una progressione geometrica di valori di $n$ da testare (da 1000 a 10.000.000 elementi) e si occupa del riempimento iniziale dell'albero. Mentre \texttt{ExperimentRunner.py} implementa l'effettivo ciclo di misurazione e calcolando la mediana finale.
 \end{itemize}
-
-
-\section*{Misurazione}
-Per la misurazione abbiamo utilizzato metodi come, per esempio, \texttt{perf\_counter()} per misurare il tempo di esecuzione dell'inserimento di chiavi in alberi BST, AVL e RB. Abbiamo eseguito più iterazioni per ogni valore di $n$ per ottenere stime robuste dei tempi di esecuzione. Abbiamo anche utilizzato grafici per visualizzare i risultati e confrontare le prestazioni dei diversi tipi di alberi. I grafici mostrano il tempo medio di inserimento in funzione del numero di chiavi presenti nell'albero, evidenziando le differenze tra BST, AVL e RB.
 
 \subsection*{Algoritmo}
-Il progetto implementa un sistema di misurazione delle prestazioni per tre diverse strutture dati ad albero: Alberi Binari di Ricerca (BST), Alberi AVL e Alberi Rosso-Nero (RBT). L'obiettivo è quantificare il tempo di inserimento di una chiave in ciascun tipo di albero al variare della dimensione dell'albero stesso.
+Per ciascun valore di $n$ identificato dalla progressione geometrica, e per ogni struttura dati analizzata, il processo di misurazione si articola rigorosamente nei seguenti passi:
 
-\subsection*{Struttura del Progetto}
-Il progetto è organizzato nei seguenti moduli:
-\begin{itemize}
-    \item \textbf{ExperimentSetup}: Configura i parametri dell'esperimento, calcolando una progressione geometrica di valori di $n$ da testare (da 1000 a 10.000.000 elementi) e inizializzando gli alberi con $n$ chiavi casuali.
-    \item \textbf{ExperimentRunner}: Esegue una serie di esperimenti controllati per ciascun tipo di albero e per ogni valore di $n$.
-    \item \textbf{BST, AVL, RBT}: Implementano le tre strutture dati con operazioni di inserimento, ricerca e rimozione.
-    \item \textbf{KeyManager}: Gestisce l'insieme di chiavi utilizzate negli esperimenti.
-    \item \textbf{Plotter}: Visualizza i risultati degli esperimenti tramite grafici.
-\end{itemize}
-
-\subsection*{Algoritmo di Misurazione}
-Per ogni valore di $n$ nella progressione geometrica, l'algoritmo esegue i seguenti passi:
 \begin{enumerate}
-    \item Inizializzazione: Viene creato un albero vuoto (BST, AVL o RBT).
-    \item Popolazione iniziale: L'albero viene popolato con $n$ chiavi casuali generate da una lista predefinita di chiavi.
-    \item Ciclo di misurazione: Per 10 iterazioni (configurabili):
+    \item \textbf{Inizializzazione}: Viene istanziato un albero inizialmente vuoto (BST, AVL o RBT).
+    
+    \item \textbf{Popolazione iniziale}: Sfruttando \texttt{KeyManager}, l'albero viene popolato inserendo $n$ chiavi estratte casualmente dall'insieme globale. Al termine di questa fase, l'albero raggiunge l'esatta dimensione $n$, lasciando nel compartimento dell'array una sola chiave disponibile e non ancora utilizzata.
+    
+    \item \textbf{Ciclo di misurazione}: Viene avviato un blocco ripetuto di 10 iterazioni (configurabile). Ciascuna iterazione esegue in sequenza le seguenti operazioni:
     \begin{enumerate}
-        \item Viene selezionata una chiave disponibile dall'insieme delle chiavi non ancora inserite.
-        \item Si misura il tempo di inserimento di questa chiave nell'albero utilizzando \texttt{time.perf\_counter()}.
-        \item Viene rimossa casualmente una chiave dall'albero per mantenere la dimensione costante e simulare un carico dinamico.
+        \item \textbf{Selezione ed Inserimento Cronometrato}: Viene prelevata l'unica chiave disponibile rimasta esclusa dall'albero e si misura in modo isolato il solo tempo di esecuzione dell'operazione \texttt{insert(k)} tramite la funzione di sistema \texttt{time.perf\_counter()}. In questo istante la dimensione dell'albero sale temporaneamente a $n+1$.
+        
+        \item \textbf{Rimozione ed Espulsione Silenziosa}: Si sceglie in modo puramente casuale una delle chiavi attualmente presenti all'interno dell'albero e la si rimuove tramite l'operazione \texttt{remove()} \textit{senza cronometrare} l'esecuzione.
     \end{enumerate}
-    \item Calcolo della mediana: Viene calcolata la mediana dei 10 tempi di inserimento misurati, che rappresenta una stima robusta delle prestazioni.
+
+    \item \textbf{Calcolo della statistica robusta}: Al termine delle 10 iterazioni, l'insieme dei tempi campionati viene aggregato calcolandone la mediana. Questo valore finale viene registrato come stima robusta delle prestazioni di inserimento per la dimensione $n$ corrente.
 \end{enumerate}
 
-\subsection*{Caratteristiche Implementative}
+Questa specifica tecnica a coppie di \textit{insert-remove} garantisce il soddisfacimento simultaneo di due requisiti sperimentali critici:
 \begin{itemize}
-    \item \textbf{Progressione geometrica}: I valori di $n$ sono generati secondo una progressione geometrica per coprire uniformemente lo spazio logaritmico tra il minimo e il massimo.
-    \item \textbf{Bilanciamento dinamico}: AVL e RBT mantengono automaticamente il bilanciamento dell'albero dopo ogni inserimento e rimozione.
-    \item \textbf{Gestione della memoria}: Dopo ogni esperimento completo per un valore di $n$, la memoria viene liberata mediante garbage collection per evitare interferenze tra esperimenti successivi.
-    \item \textbf{Raccolta dati robusta}: L'uso della mediana invece della media riduce l'impatto di misurazioni anomale e fornisce stime più affidabili.
+    \item \textbf{Dimensione Controllata}: Poiché l'eliminazione compensa esattamente l'inserimento precedente, viene garantito che prima di far partire il cronometro al giro successivo l'albero ritorni ad avere esattamente $n$ chiavi.
+    \item \textbf{Varietà Morfologica}: La continua espulsione e reinserimento di chiavi casuali altera costantemente e dinamicamente la topologia dei rami, modificando la struttura. In questo modo, le misurazioni avvengono su una famiglia di alberi le cui forme sono uniformemente distribuite nello spazio degli alberi possibili di dimensione $n$, evitando casi degeneri.
 \end{itemize}
+\clearpage
+\subsection*{Risultati e Analisi}
+In seguito presentate e discusse le misurazioni eseguite in locale su MacBook Air M3 (con 16Gb di RAM), poi raccolti all'interno di un file in formato CSV ed elaborati all'interno di grafici.
+
+\subsubsection*{Grafico Principale}
+Il grafico mostra il comportamento delle strutture dati nel caso medio, dove le chiavi vengono inserite con distribuzione casuale uniforme grazie al \texttt{KeyManager}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafico_misurazioni_Stefano.png}
+\end{figure}
+
+L'asse delle ascisse esprime la dimensione $N$ dell'albero sfruttando una scala logaritmica (da $1.000$ a $10.000.000$ elementi). Tramite la scala logaritmica si è in grado di mostrare una curva di complessità teorica pari a $\mathcal{O}(\log n)$, che assume l'aspetto grafico di una retta.
+
+Dall'osservazione della figura, si nota:
+\begin{itemize}
+    \item \textbf{Stabilità di BST e RBT}: Le progressioni relative a BST e RBT risultano costantemente schiacciate verso il basso lungo l'intero esperimento, denotando un'elevatissima efficienza d'esecuzione.
+    \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio complessivo, pesano sul tempo complessivo.
+\end{itemize}
+
+\subsubsection*{Grafico dell'analisi asintotica}
+Il grafico mostra, come il precedente, il comportamento delle tre strutture dati in seguito all'inserimento casuale di chiavi.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafico_curve_logaritmiche.png}
+\end{figure}
+
+L'asse delle ordinate mantiene la misurazione in secondi su scala logaritmica, mentre l'asse delle ascisse cambia solamente la scala passando all'ordine $10^7$. Il grafico mostra una curva che, dopo un accelerazione iniziale, flette e si stabilizza su una linea retta orizzontale.
+
+Dall'osservazione della figura, si nota:
+\begin{itemize}
+    \item \textbf{Convergenza di BST e RBT}: Le curve di BST e RBT crescono inizialmente poco per poi "spianare", stabilizzandosi in modo netto su un andamento orizzontale sui grandi valori di $N$.
+    \item \textbf{Divergenza dell'AVL}: Si nota invece che la progressione associata all'albero AVL, inizialmente sale molto più velocemente rispetto alle altre due strutture dati, per poi stabilizzarsi attorno a $1,1 \cdot 10^{-5}$ secondi. Questo dimostra graficamente che i vincoli dell'AVL rendono più difficile l'efficientamento.
+\end{itemize}
+
+\subsubsection*{Grafico 3}
+
 \end{document}  

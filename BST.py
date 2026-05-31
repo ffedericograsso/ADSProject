@@ -16,6 +16,7 @@ class BST:
     
     def __init__(self, root = None):
         self.root = root
+        self.rotation_count = 0
     
     def __str__(self):
         if self.root == None:
@@ -137,6 +138,7 @@ class BST:
             node.parent.right = left
         left.right = node
         node.parent = left
+        self.rotation_count += 1
 
     def rotate_left(self, node):
         if node.right is None:
@@ -154,3 +156,4 @@ class BST:
             node.parent.right = right
         right.left = node
         node.parent = right
+        self.rotation_count += 1

@@ -1,13 +1,14 @@
 import matplotlib.pyplot as plt
 import csv
 
-class ResultPlotter:
-    def __init__(self, filename="esperimenti_risultati.csv"):
+class StandardPlotter:
+    def __init__(self, filename="esperimenti_risultati_Mac1.csv"):
         self.filename = filename
         self.results = {
-            "BST": {"X": [], "Y": []},
             "AVL": {"X": [], "Y": []},
-            "RBT": {"X": [], "Y": []}
+            "RBT": {"X": [], "Y": []},
+            "BST": {"X": [], "Y": []},
+            
         }
         self._load_from_csv()
 
@@ -24,13 +25,13 @@ class ResultPlotter:
                     self.results[tree_name]["Y"].append(median_time)
 
     def plot_time_complexity(self):
-        # Imposta la grandezza della finestra del grafico
         plt.figure(figsize=(10, 6))
 
         color_map = {
-            "BST": "blue",
             "AVL": "orange",
-            "RBT": "red"
+            "RBT": "red",
+            "BST": "blue",
+            
         }
 
         for tree_name, data in self.results.items():
@@ -49,15 +50,15 @@ class ResultPlotter:
         plt.xlabel('Dimensione dell\'albero (N)', fontsize=12)
         plt.ylabel('Tempo Mediano (secondi)', fontsize=12)
         
-        # Uso scala logaritmica sull'asse X per via della progressione geometrica usata 
-        plt.xscale('log')
-        plt.grid(True, which="both", ls="--", alpha=0.5)
+        plt.grid(True, which="major", ls="--", alpha=0.5)
         plt.legend(fontsize=12)
-        
-        print("\n=> Generazione grafico completata! Chiudi la finestra per terminare il programma.")
         plt.tight_layout()
+        
+        plt.savefig("grafico_curve_logaritmiche.png", dpi=300)
+        print("=> Grafico generato correttamente!")
         plt.show()
 
 if __name__ == "__main__":
-    plotter = ResultPlotter()
+    # Assicurati che il nome del file CSV sia quello corretto generato dai tuoi test
+    plotter = StandardPlotter("esperimenti_risultati_Mac1.csv")
     plotter.plot_time_complexity()
