@@ -10,6 +10,8 @@
 \usepackage{pgfplots}
 \usepackage{float}
 \usepackage{titlesec}
+\usepackage{caption}
+\captionsetup{font=small}
 
 \titleformat{\section}
   {\normalfont\large\bfseries}{\thesection}{1em}{}
@@ -88,6 +90,7 @@ Il grafico mostra il comportamento delle strutture dati nel caso medio, dove le 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{grafico_misurazioni_Stefano.png}
+    \caption{MacBook Air M3 (16Gb RAM)}
 \end{figure}
 
 L'asse delle ascisse esprime la dimensione $N$ dell'albero sfruttando una scala logaritmica (da $1.000$ a $10.000.000$ elementi). Tramite la scala logaritmica si è in grado di mostrare una curva di complessità teorica pari a $\mathcal{O}(\log n)$, che assume l'aspetto grafico di una retta.
@@ -103,7 +106,8 @@ Il grafico mostra, come il precedente, il comportamento delle tre strutture dati
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_curve_logaritmiche.png}
+    \includegraphics[width=0.85\textwidth]{grafico_curve_logaritmiche_Stefano.png}
+    \caption{MacBook Air M3 (16Gb RAM)}
 \end{figure}
 
 L'asse delle ordinate mantiene la misurazione in secondi su scala logaritmica, mentre l'asse delle ascisse cambia solamente la scala passando all'ordine $10^7$. Il grafico mostra una curva che, dopo un accelerazione iniziale, flette e si stabilizza su una linea retta orizzontale.
@@ -120,7 +124,8 @@ Si nota che
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_rotazioni.png}
+    \includegraphics[width=0.85\textwidth]{grafico_rotazioni_Stefano.png}
+    \caption{MacBook Air M3 (16Gb RAM)}
 \end{figure}
 
 Dall'osservazione della figura, si nota:
@@ -134,13 +139,14 @@ Per la stampa di questo grafico, come per il precedente, l'inserimento è stato 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_caso_pessimo.png}
+    \includegraphics[width=0.85\textwidth]{grafico_caso_pessimo_Stefano.png}
+    \caption{MacBook Air M3 (16Gb RAM)}
 \end{figure}
 
 Dall'osservazione della figura, si nota:
 \begin{itemize}
     \item \textbf{Collasso prestazionale del BST}: La progressione del BST devia con una pendenza marcatamente lineare verso l'alto già a ridosso di poche migliaia di nodi. Privo di logiche di riequilibrio, l'albero subisce passivamente l'ordinamento dell'input inserendo ogni chiave come figlio destro della precedente. La struttura degenera a tutti gli effetti in una lista concatenata, portando l'altezza a $h = \mathcal{O}(n)$, confermando il limite della struttura dati non bilanciata.
-    \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come il Red-Black si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni rigide.
+    \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come il Red-Black si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni.
 \end{itemize}
 
 \section{Conclusioni}

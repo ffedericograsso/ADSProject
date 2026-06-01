@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1780298915.26516 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1780298916.73956 0
-  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1780298915.07142 13738 edacf4e8498d29ce531f6f0544671577 ""
+["pdflatex"] 1780299690.19267 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1780299691.70498 0
+  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1780299690.00914 13962 9d4637bfd662c92286a2cb3a0e13a144 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -161,6 +161,8 @@
   "/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls" 1748806692 20144 b966087dda3b194755eb460d32e2ef75 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/base/inputenc.sty" 1738182759 5048 0270515b828149155424600fd2d58ac5 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/base/size10.clo" 1748806692 8448 686612a86f0e04f41ea577f5ec7e83d8 ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/caption/caption.sty" 1696191071 56128 c2ccf1a29d78c33bc553880402e4fb9a ""
+  "/usr/local/texlive/2026/texmf-dist/tex/latex/caption/caption3.sty" 1696191071 72619 ee90b6612147680fd73c3b1406a74245 ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty" 1579991033 13886 d1306dcf79a944f6988e688c1785f9ce ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty" 1759437024 46885 8953c67ffba03252c6090aa19568b8ba ""
   "/usr/local/texlive/2026/texmf-dist/tex/latex/float/float.sty" 1137110151 6749 16d2656a1984957e674b149555f1ea1d ""
@@ -203,13 +205,13 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1773840949 5541377 04880c840ca220163a28f1a3af0ee662 ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1773840802 3636771 0bdf5bda6577df08d0d1ea5546312a14 ""
   "/usr/local/texlive/2026/texmf.cnf" 1772409725 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "grafico_caso_pessimo.png" 1780269954.90073 204987 6e5ca1b1f375a22344c16dc677bb71cc ""
-  "grafico_curve_logaritmiche.png" 1780265416.89537 226562 ddb9a8f360e26dfb0897af95b9d88d72 ""
+  "grafico_caso_pessimo_Stefano.png" 1780269954.90073 204987 6e5ca1b1f375a22344c16dc677bb71cc ""
+  "grafico_curve_logaritmiche_Stefano.png" 1780265416.89537 226562 ddb9a8f360e26dfb0897af95b9d88d72 ""
   "grafico_misurazioni_Stefano.png" 1780261470.48279 88567 bfb7ab603841720d07be2f200a977323 ""
-  "grafico_rotazioni.png" 1780268653.19827 194524 72c07651aa37842967afc6de837a48bb ""
-  "relazione.aux" 1780298916.67894 1358 43127771c06baa1ea84459624db41576 "pdflatex"
-  "relazione.out" 1780298916.67948 1453 51dc60c53d326a383cef0749eef36a42 "pdflatex"
-  "relazione.tex" 1780298915.07142 13738 edacf4e8498d29ce531f6f0544671577 ""
+  "grafico_rotazioni_Stefano.png" 1780268653.19827 194524 72c07651aa37842967afc6de837a48bb ""
+  "relazione.aux" 1780299691.63676 1934 6a348482c997a6d213e95624cb8ccdc0 "pdflatex"
+  "relazione.out" 1780299691.63728 1453 51dc60c53d326a383cef0749eef36a42 "pdflatex"
+  "relazione.tex" 1780299690.00914 13962 9d4637bfd662c92286a2cb3a0e13a144 ""
   (generated)
   "relazione.aux"
   "relazione.log"

@@ -45,7 +45,7 @@ def run_rotations_benchmark():
         plt.plot(N_values, results[struct_name], marker='D', markersize=4, linestyle='-', 
                  label=struct_name, color=color_map[struct_name])
                  
-    plt.title('Rotazioni cumulative su input casuale', fontsize=14)
+    plt.title('Rotazioni cumulative su input pre-ordinato', fontsize=14)
     plt.xlabel('Dimensione dell\'albero (N)', fontsize=12)
     plt.ylabel('Numero Totale di Rotazioni', fontsize=12)
     plt.grid(True, which="both", ls="--", alpha=0.5)
