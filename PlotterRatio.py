@@ -1,14 +1,19 @@
 import matplotlib.pyplot as plt
 import csv
+import numpy as np
+from scipy.optimize import curve_fit
+
+# Definiamo la funzione logaritmica teorica di riferimento da fittare: T(n) = c * log2(n)
+def log_theory(x, c):
+    return c * np.log2(x)
 
 class StandardPlotter:
-    def __init__(self, filename="esperimenti_risultati/esperimenti_risultati_Mac1.csv"):
+    def __init__(self, filename="esperimenti_risultati/esperimenti_risultati.csv"):
         self.filename = filename
         self.results = {
             "AVL": {"X": [], "Y": []},
             "RBT": {"X": [], "Y": []},
             "BST": {"X": [], "Y": []},
-            
         }
         self._load_from_csv()
 
@@ -25,40 +30,64 @@ class StandardPlotter:
                     self.results[tree_name]["Y"].append(median_time)
 
     def plot_time_complexity(self):
-        plt.figure(figsize=(10, 6))
+        plt.figure(figsize=(12, 7))
 
         color_map = {
             "AVL": "orange",
             "RBT": "red",
             "BST": "blue",
-            
         }
 
         for tree_name, data in self.results.items():
             if len(data["X"]) > 0:
+                # Convertiamo in array numpy per i calcoli matematici
+                x_data = np.array(data["X"])
+                y_data = np.array(data["Y"])
+                
+                # 1. Plottiamo i dati reali misurati (i punti discreti con linea continua sottile)
                 plt.plot(
-                    data["X"], 
-                    data["Y"], 
+                    x_data, 
+                    y_data, 
                     marker='o', 
-                    markersize=4,
+                    markersize=3,
                     linestyle='-', 
-                    label=tree_name,
+                    linewidth=1,
+                    label=f"{tree_name}",
+                    color=color_map[tree_name]
+                )
+                
+                # 2. CALCOLO DELLA CURVA TEORICA INTERPOLATA (FITTING)
+                # Calcola il coefficiente 'c' ottimale che minimizza lo scarto tra la teoria e i tuoi dati
+                popt, _ = curve_fit(log_theory, x_data, y_data)
+                c_ottimale = popt[0]
+                
+                # Generiamo un range denso di punti per disegnare una curva logaritmica fluida e continua
+                x_smooth = np.linspace(x_data.min(), x_data.max(), 500)
+                y_theory = log_theory(x_smooth, c_ottimale)
+                
+                # 3. Plottiamo la curva logaritmica teorica corrispondente (linea tratteggiata più spessa)
+                plt.plot(
+                    x_smooth, 
+                    y_theory, 
+                    linestyle='--', 
+                    linewidth=2.5,
+                    alpha=0.8,
                     color=color_map[tree_name]
                 )
 
-        plt.title('Tempo mediano di inserimento su alberi di dimensione N', fontsize=14)
+        plt.title('Tempo mediano di inserimento', fontsize=14)
         plt.xlabel('Dimensione dell\'albero (N)', fontsize=12)
         plt.ylabel('Tempo Mediano (secondi)', fontsize=12)
         
         plt.grid(True, which="major", ls="--", alpha=0.5)
-        plt.legend(fontsize=12)
+        plt.legend(fontsize=11, loc="upper left")
         plt.tight_layout()
         
         plt.savefig("grafico_curve_logaritmiche.png", dpi=300)
-        print("=> Grafico generato correttamente!")
+        print("=> Grafico con curve logaritmiche teoriche generato correttamente!")
         plt.show()
 
 if __name__ == "__main__":
-    # Assicurati che il nome del file CSV sia quello corretto generato dai tuoi test
+    # Assicurati di impostare il percorso corretto al file CSV con i tuoi dati reali
     plotter = StandardPlotter("esperimenti_risultati/esperimenti_risultati.csv")
     plotter.plot_time_complexity()

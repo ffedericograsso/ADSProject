@@ -4,7 +4,7 @@ import sys
 
 # Assicuriamo l'inclusione dei moduli della cartella principale
 sys.path.append(".")
-from project import Project
+from Project import Project
 
 def run_real_worst_case():
     # Valori di N controllati per mostrare la crescita lineare del BST senza piantare la CPU
@@ -50,11 +50,11 @@ def run_real_worst_case():
             results[struct_name], 
             marker='x', 
             linestyle='-', 
-            label=f"{struct_name} (Input Ordinato)", 
+            label=f"{struct_name}", 
             color=color_map[struct_name]
         )
                  
-    plt.title('Caso Pessimo: Tempo di inserimento con sequenza pre-ordinata', fontsize=14)
+    plt.title(' Tempo di inserimento con sequenza pre-ordinata', fontsize=14)
     plt.xlabel('Dimensione dell\'albero (N)', fontsize=12)
     plt.ylabel('Tempo di Inserimento (secondi)', fontsize=12)
     plt.grid(True, which="both", ls="--", alpha=0.5)
