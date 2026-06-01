@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 class ResultPlotter:
-    def __init__(self, filename="esperimenti_risultati.csv"):
+    def __init__(self, filename="esperimenti_risultati/esperimenti_risultati.csv"):
         self.filename = filename
         self.results = {
             "BST": {"X": [], "Y": []},

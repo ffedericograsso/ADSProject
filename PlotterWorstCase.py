@@ -4,7 +4,7 @@ import sys
 
 # Assicuriamo l'inclusione dei moduli della cartella principale
 sys.path.append(".")
-from Project import Project
+from project import Project
 
 def run_real_worst_case():
     # Valori di N controllati per mostrare la crescita lineare del BST senza piantare la CPU

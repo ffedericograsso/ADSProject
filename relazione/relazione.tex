@@ -80,39 +80,56 @@ Questa specifica tecnica a coppie di \textit{insert-remove} garantisce il soddis
 \end{itemize}
 \clearpage
 \section{Risultati e Analisi}
-In seguito presentate e discusse le misurazioni eseguite in locale su MacBook Air M3 (con 16Gb di RAM), poi raccolti all'interno di un file in formato CSV ed elaborati all'interno di grafici.
+In seguito presentate e discusse le misurazioni eseguite in locale su MacBook Air M3 (con 16Gb di RAM) e un HP  Pavilion (con 8Gb di RAM), poi raccolti all'interno di un file in formato CSV ed elaborati all'interno di grafici.
 
 \subsection{Grafico Principale}
 Il grafico mostra il comportamento delle strutture dati nel caso medio, dove le chiavi vengono inserite con distribuzione casuale uniforme grazie al \texttt{KeyManager}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_misurazioni_Stefano.png}
+    \includegraphics[width=0.85\textwidth]{grafici_Stefano/grafico_misurazioni_Stefano.png}
 \end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafici_Federico/graph1.png}
+\end{figure}
+
 
 L'asse delle ascisse esprime la dimensione $N$ dell'albero sfruttando una scala logaritmica (da $1.000$ a $10.000.000$ elementi). Tramite la scala logaritmica si è in grado di mostrare una curva di complessità teorica pari a $\mathcal{O}(\log n)$, che assume l'aspetto grafico di una retta.
 
-Dall'osservazione della figura, si nota:
+Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Stabilità di BST e RBT}: Le progressioni relative a BST e RBT risultano costantemente schiacciate verso il basso lungo l'intero esperimento, denotando un'elevatissima efficienza d'esecuzione.
     \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio complessivo, pesano sul tempo complessivo.
 \end{itemize}
+
+
+Per quanto riguarda seconda figura, si può notare un grafico simile a quello del primo, con la sola differenza che l'RBT alla fine sale leggermente di più rispetto al BST.
 
 \subsection{Grafico dell'analisi asintotica}
 Il grafico mostra, come il precedente, il comportamento delle tre strutture dati in seguito all'inserimento casuale di chiavi.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_curve_logaritmiche.png}
+    \includegraphics[width=0.85\textwidth]{grafici_Stefano/grafico_curve_logaritmiche.png}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafici_Federico/graph2.png}
 \end{figure}
 
 L'asse delle ordinate mantiene la misurazione in secondi su scala logaritmica, mentre l'asse delle ascisse cambia solamente la scala passando all'ordine $10^7$. Il grafico mostra una curva che, dopo un accelerazione iniziale, flette e si stabilizza su una linea retta orizzontale.
 
-Dall'osservazione della figura, si nota:
+Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Convergenza di BST e RBT}: Le curve di BST e RBT crescono inizialmente poco per poi "spianare", stabilizzandosi in modo netto su un andamento orizzontale sui grandi valori di $N$.
     \item \textbf{Divergenza dell'AVL}: Si nota invece che la progressione associata all'albero AVL, inizialmente sale molto più velocemente rispetto alle altre due strutture dati, per poi stabilizzarsi attorno a $1,1 \cdot 10^{-5}$ secondi. Questo dimostra graficamente che i vincoli dell'AVL rendono più difficile l'efficientamento.
 \end{itemize}
+
+
+Anche qui, per quanto riguarda seconda figura, si può notare un grafico simile a quello del primo, con la sola differenza che l'RBT alla fine sale leggermente di più rispetto al BST.
 
 \subsection{Grafico Rotazioni Cumulative}
 Per la stampa di questo grafico l'inserimento è stato limitato alle chiavi $[100, 500, 1000, 2500, 5000, 7500, 10000]$. Viene mostrato il costo strutturale rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di $N$ durante il popolamento casuale uniforme.
@@ -120,10 +137,15 @@ Si nota che
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_rotazioni.png}
+    \includegraphics[width=0.85\textwidth]{grafici_Stefano/grafico_rotazioni.png}
 \end{figure}
 
-Dall'osservazione della figura, si nota:
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafici_Federico/graph3.png}
+\end{figure}
+
+Qui i due graifici combaciano.Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Assenza di rotazioni nel BST}: La progressione del BST rimane costantemente ancorata allo zero per tutta la durata del test. L'algoritmo non esegue alcuna rotazione, confermando l'assenza totale di manutenzione nel caso medio.
     \item \textbf{Costo di bilanciamento dell'AVL rispetto al RBT}: L'albero AVL mostra una pendenza superiore rispetto alla variante Red-Black. A causa del vincolo sulle altezze, ogni operazione di inserimento ha un'alta probabilità di innescare riequilibri. Al contrario, l'albero Red-Black gestisce gran parte delle violazioni strutturali tramite la ricolorazione logica dei nodi (operazione molto più leggera per la CPU), ricorrendo alle rotazioni dei nodi con una frequenza inferiore.
@@ -134,10 +156,16 @@ Per la stampa di questo grafico, come per il precedente, l'inserimento è stato 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{grafico_caso_pessimo.png}
+    \includegraphics[width=0.85\textwidth]{grafici_Stefano/grafico_caso_pessimo.png}
 \end{figure}
 
-Dall'osservazione della figura, si nota:
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{grafici_Federico/graph4.png}
+\end{figure}
+
+
+Anche qui i due graifici combaciano.Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Collasso prestazionale del BST}: La progressione del BST devia con una pendenza marcatamente lineare verso l'alto già a ridosso di poche migliaia di nodi. Privo di logiche di riequilibrio, l'albero subisce passivamente l'ordinamento dell'input inserendo ogni chiave come figlio destro della precedente. La struttura degenera a tutti gli effetti in una lista concatenata, portando l'altezza a $h = \mathcal{O}(n)$, confermando il limite della struttura dati non bilanciata.
     \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come il Red-Black si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni rigide.

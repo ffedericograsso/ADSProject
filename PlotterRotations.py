@@ -3,7 +3,7 @@ import sys
 import random
 
 sys.path.append(".")
-from Project import Project
+from project import Project
 
 def run_rotations_benchmark():
     # Valori di N per cui calcolare il numero di rotazioni

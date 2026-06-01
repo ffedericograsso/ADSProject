@@ -1,6 +1,6 @@
 from ExperimentSetup import ExperimentSetup
 from ExperimentRunner import ExperimentRunner
-from ADSProject.PlotterMain import ResultPlotter
+from PlotterMain import ResultPlotter
 
 def main():
     print("Inizializzazione del setup degli esperimenti...")

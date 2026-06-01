@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 
 class StandardPlotter:
-    def __init__(self, filename="esperimenti_risultati_Mac1.csv"):
+    def __init__(self, filename="esperimenti_risultati/esperimenti_risultati_Mac1.csv"):
         self.filename = filename
         self.results = {
             "AVL": {"X": [], "Y": []},
@@ -60,5 +60,5 @@ class StandardPlotter:
 
 if __name__ == "__main__":
     # Assicurati che il nome del file CSV sia quello corretto generato dai tuoi test
-    plotter = StandardPlotter("esperimenti_risultati_Mac1.csv")
+    plotter = StandardPlotter("esperimenti_risultati/esperimenti_risultati.csv")
     plotter.plot_time_complexity()
