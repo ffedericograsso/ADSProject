@@ -41,11 +41,24 @@ L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Albe
 \section{Richiami Teorici}
 Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
 \begin{itemize}
-    \item \textbf{BST Semplice:} Non garantisce alcun bilanciamento. Nel caso peggiore può degenerare in $\mathcal{O}(n)$, portando a tempi di inserimento lineari.
+    \item \textbf{BST Semplice:} Il BST non impone alcun vincolo strutturale sulla forma dell'albero. Il costo di un inserimento è proporzionale alla lunghezza del cammino radice-foglia, ovvero all'altezza $h$. Con input casuale uniforme, l'altezza attesa è $h = \mathcal{O}(\log n)$, ma nel caso peggiore (input ordinato) l'albero degenera in una lista concatenata con $h = \mathcal{O}(n)$.
 
-    \item \textbf{Alberi AVL:} Mantengono un bilanciamento stretto garantendo che la differenza di altezza tra i sotto-alberi di ogni nodo sia al massimo 1. Nel caso peggiore vengono assicurati tempi asintotici $\mathcal{O}(\log n)$ al costo di frequenti rotazioni strutturali.
+    \item \textbf{Alberi AVL:} Gli alberi AVL mantengono un vincolo di bilanciamento stretto: per ogni nodo, la differenza di altezza tra il sotto-albero sinistro e destro (fattore di bilanciamento) deve essere al massimo 1 in valore assoluto. Questo garantisce un'altezza massima di circa:
+    $$h_{AVL} \leq 1.44 \log_2(n+2)$$
+    assicurando $\mathcal{O}(\log n)$ nel caso peggiore. Quando un inserimento viola il vincolo, vengono eseguite rotazioni (semplici o doppie) per ripristinare il bilanciamento. Si distinguono quattro casi: rotazione sinistra, rotazione destra, rotazione sinistra-destra e rotazione destra-sinistra.
 
-    \item \textbf{Alberi Red-Black:} Utilizzando colorazioni per i nodi viene garantita una complessità $\Theta(\log n)$. Sebbene il cammino massimo possa essere leggermente più lungo rispetto a un AVL, il RBT richiede tipicamente meno operazioni di rotazione per ripristinare le proprietà dopo un inserimento.
+    \item \textbf{Alberi Red-Black:} Gli alberi Red-Black associano a ogni nodo un colore (rosso o nero) e impongono le seguenti proprietà: 
+    \begin{enumerate}
+        \item Ogni nodo è rosso o nero
+        \item La radice è nera
+        \item Ogni foglia NIL è nera
+        \item Un nodo rosso ha entrambi i figli neri (no due rossi consecutivi)
+        \item Per ogni nodo, tutti i cammini verso le foglie contengono lo stesso numero di nodi neri (*black-height*)
+    \end{enumerate}
+
+Queste proprietà garantiscono un'altezza massima di:
+$$h_{RBT} \leq 2\log_2(n+1)$$
+Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL.
 \end{itemize}
 
 \section{Struttura del Progetto}
@@ -125,7 +138,8 @@ Il grafico mostra, come il precedente, il comportamento delle tre strutture dati
     \caption*{Misurazioni HP Pavilion}
 \end{figure}
 
-L'asse delle ordinate mantiene la misurazione in secondi su scala logaritmica, mentre l'asse delle ascisse cambia solamente la scala passando all'ordine $10^7$. Il grafico mostra una curva che, dopo un accelerazione iniziale, flette e si stabilizza su una linea retta orizzontale.
+Il secondo grafico mantiene le stesse misurazioni del precedente, ma cambia la scala dell'asse delle ascisse: da logaritmica a lineare, con valori fino a $10^7$. Questo cambio di prospettiva permette di osservare il comportamento asintotico delle strutture dati, ovvero come i tempi si stabilizzano al crescere di N.
+Una complessità $\mathcal{O}(\log n)$ su scala lineare produce una curva che cresce rapidamente per valori piccoli di N, per poi "appiattirsi" progressivamente. Questo è esattamente ciò che si osserva per BST e RBT, le cui curve convergono verso un andamento orizzontale. L'AVL invece, pur stabilizzandosi anch'esso, lo fa su un valore significativamente più alto rispetto alle altre due strutture, confermando il peso costante delle rotazioni di riequilibrio.
 
 Dall'osservazione delle figure, si nota:
 \begin{itemize}
@@ -137,7 +151,6 @@ Anche qui, come nella coppia di grafici precedente, si nota un calo di performan
 
 \subsection{Grafico Rotazioni Cumulative}
 Per la stampa di questo grafico l'inserimento è stato limitato alle chiavi $[100, 500, 1000, 2500, 5000, 7500, 10000]$. Viene mostrato il costo strutturale rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di $N$ durante il popolamento casuale uniforme.
-Si nota che 
 
 \begin{figure}[htbp]
     \centering
@@ -157,11 +170,13 @@ Per la stampa di questo grafico, come per il precedente, l'inserimento è stato 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{grafici_Stefano/grafico_caso_pessimo.png}
+    \caption*{Misurazioni MacBook Air M3}
 \end{figure}
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{grafici_Federico/graph4.png}
+    \caption*{Misurazioni HP Pavilion}
 \end{figure}
 
 Qui i due grafici sono più simili tra loro rispetto alla prima coppia, con il primo rimanendo comunque sempre più stabile. Nel secondo grafico si nota che all'inserimento del nodo $5000$ si presenta un rallentamento che esce dall'andamento generale delle misurazioni. In generale, dall'osservazione delle figure, si nota:

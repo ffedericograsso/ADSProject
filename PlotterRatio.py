@@ -49,7 +49,7 @@ class StandardPlotter:
                     x_data, 
                     y_data, 
                     marker='o', 
-                    markersize=3,
+                    markersize=4,
                     linestyle='-', 
                     linewidth=1,
                     label=f"{tree_name}",
@@ -89,5 +89,5 @@ class StandardPlotter:
 
 if __name__ == "__main__":
     # Assicurati di impostare il percorso corretto al file CSV con i tuoi dati reali
-    plotter = StandardPlotter("esperimenti_risultati/esperimenti_risultati.csv")
+    plotter = StandardPlotter("esperimenti_risultati/esperimenti_risultati_Mac1.csv")
     plotter.plot_time_complexity()
