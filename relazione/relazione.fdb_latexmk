@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1780270928.44437 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1780270929.94905 0
-  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1780270926.85088 11569 cdc7335c5188d9c5b696a495e73fe2bf ""
+["pdflatex"] 1780298915.26516 "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" "relazione.pdf" "relazione" 1780298916.73956 0
+  "/Users/stefanolondero/Documents/UNI/Secondo_Anno/Algoritmi e Strutture Dati (12 CFU)/Lab/Progetto w: Federico/ADSProject/Relazione/relazione.tex" 1780298915.07142 13738 edacf4e8498d29ce531f6f0544671577 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -207,9 +207,9 @@
   "grafico_curve_logaritmiche.png" 1780265416.89537 226562 ddb9a8f360e26dfb0897af95b9d88d72 ""
   "grafico_misurazioni_Stefano.png" 1780261470.48279 88567 bfb7ab603841720d07be2f200a977323 ""
   "grafico_rotazioni.png" 1780268653.19827 194524 72c07651aa37842967afc6de837a48bb ""
-  "relazione.aux" 1780270929.88836 1358 87a6bce512e0fcae2a9a7497fc4252be "pdflatex"
-  "relazione.out" 1780270929.88886 1453 51dc60c53d326a383cef0749eef36a42 "pdflatex"
-  "relazione.tex" 1780270926.85088 11569 cdc7335c5188d9c5b696a495e73fe2bf ""
+  "relazione.aux" 1780298916.67894 1358 43127771c06baa1ea84459624db41576 "pdflatex"
+  "relazione.out" 1780298916.67948 1453 51dc60c53d326a383cef0749eef36a42 "pdflatex"
+  "relazione.tex" 1780298915.07142 13738 edacf4e8498d29ce531f6f0544671577 ""
   (generated)
   "relazione.aux"
   "relazione.log"
