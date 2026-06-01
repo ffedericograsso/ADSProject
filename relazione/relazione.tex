@@ -10,7 +10,7 @@
 \usepackage{pgfplots}
 \usepackage{float}
 \usepackage{titlesec}
-\usepackage{caption}
+\usepackage{caption, titling}
 \captionsetup{font=small}
 
 \titleformat{\section}
@@ -21,19 +21,38 @@
 
 \pgfplotsset{compat=1.18}
 \geometry{a4paper, margin=1in}
-\title{Analisi delle Prestazioni di Inserimento in Alberi Binari di Ricerca}
-\author{
-    Londero Stefano\\
-    \small{172585}
-    \and
-    Grasso Federico\\
-    \small{173731}
-}
-
-\date{Algoritmi e Strutture Dati - 2026}
 
 \begin{document}
-\maketitle
+
+\begin{titlepage}
+    \centering
+    \vspace*{3cm} % Top margin
+    
+    {\Huge \bfseries Analisi delle Prestazioni di Inserimento in Alberi Binari di Ricerca \par}
+    
+    \vspace{2cm} % Space between title and authors
+    
+    \noindent
+    \begin{minipage}[t]{0.4\textwidth}
+        \centering
+        {\large Londero Stefano \\ 172585}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.4\textwidth}
+        \centering
+        {\large Grasso Federico \\ 173731}
+    \end{minipage}
+    
+    \vfill % This creates flexible space to push the date to the bottom
+    
+    {\large Algoritmi e Strutture Dati - 2026 \par}
+    
+    \vspace{2cm} % Bottom margin
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
 
 \section{Introduzione}
 L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
