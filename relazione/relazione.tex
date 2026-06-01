@@ -10,6 +10,8 @@
 \usepackage{pgfplots}
 \usepackage{float}
 \usepackage{titlesec}
+\usepackage{caption}
+\captionsetup{font=small}
 
 \titleformat{\section}
   {\normalfont\large\bfseries}{\thesection}{1em}{}
@@ -96,6 +98,7 @@ Il grafico mostra il comportamento delle strutture dati nel caso medio, dove le 
 \end{figure}
 
 
+
 L'asse delle ascisse esprime la dimensione $N$ dell'albero sfruttando una scala logaritmica (da $1.000$ a $10.000.000$ elementi). Tramite la scala logaritmica si è in grado di mostrare una curva di complessità teorica pari a $\mathcal{O}(\log n)$, che assume l'aspetto grafico di una retta.
 
 Dall'osservazione delle figure, si nota:
@@ -145,6 +148,7 @@ Si nota che
     \includegraphics[width=0.85\textwidth]{grafici_Federico/graph3.png}
 \end{figure}
 
+
 Qui i due graifici combaciano.Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Assenza di rotazioni nel BST}: La progressione del BST rimane costantemente ancorata allo zero per tutta la durata del test. L'algoritmo non esegue alcuna rotazione, confermando l'assenza totale di manutenzione nel caso medio.
@@ -164,13 +168,21 @@ Per la stampa di questo grafico, come per il precedente, l'inserimento è stato 
     \includegraphics[width=0.85\textwidth]{grafici_Federico/graph4.png}
 \end{figure}
 
-
 Anche qui i due graifici combaciano.Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Collasso prestazionale del BST}: La progressione del BST devia con una pendenza marcatamente lineare verso l'alto già a ridosso di poche migliaia di nodi. Privo di logiche di riequilibrio, l'albero subisce passivamente l'ordinamento dell'input inserendo ogni chiave come figlio destro della precedente. La struttura degenera a tutti gli effetti in una lista concatenata, portando l'altezza a $h = \mathcal{O}(n)$, confermando il limite della struttura dati non bilanciata.
-    \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come il Red-Black si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni rigide.
+    \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come il Red-Black si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni.
 \end{itemize}
 
 \section{Conclusioni}
+Lo studio ha permesso di analizzare il comportamento delle tre principali varianti di alberi binari di ricerca (BST, AVL e RBT), confermando le proprietà teoriche attraverso misurazioni su larga scala.
 
+Le misurazioni effettuate evidenziano come la scelta della struttura dati ottimale sia strettamente dipendente dalla natura del carico di lavoro e dalla distribuzione dei dati in ingresso:
+\begin{itemize}
+    \item Il \textbf{BST semplice} si è rivelato il più efficiente in scenari con input casuale uniforme. L'assenza di esecuzioni di riequilibrio annulla l'overhead sui puntatori, sfruttando la proprietà spontanea di bilanciamento indotta dalla casualità dei dati. Tuttavia, dal caso pessimo ne è stata evidenziata la fragilità, mostrando un calo di performance portando ad una complessità di $\mathcal{O}(n)$ non appena l'input presenta ordinamento crescente.
+    \item L'\textbf{Albero AVL}, pur garantendo la complessità logaritmica nello scenario peggiore, risente fortemente del vincolo sulle altezze. Nelle applicazioni ad alta frequenza di scrittura, l'elevato numero di rotazioni necessarie a mantenere la struttura bilanciata introduce una rallentamento della CPU che ne penalizza i tempi rispetto alle altre strutture dati.
+    \item L'\textbf{Albero Red-Black} si è dimostrato il miglior compromesso complessivo. Riuscendo a controllare lo sbilanciamento meglio rispetto all'AVL, riducendo il ricorso alle rotazioni dei nodi, risolvendo gran parte delle violazioni tramite ricolorazioni rosso-nere. Questa flessibilità consente di mantenere prestazioni ottime sia nel caso medio che di fronte a input degeneri, confermandolo come la struttura più robusta e versatile per scopi generali.
+\end{itemize}
+
+In conclusione, l'analisi ha confermato che i meccanismi di bilanciamento automatico rappresentano un vero e proprio "salvagente" dal punto di vista della complessità: pur introducendo un costo di manutenzione (evidente nell'AVL), essi salvano dalle degenerazioni a $\mathcal{O}(n)$ nel caso pessimo, garantendo una sicurezza permettendo l'utilizzo nei sistemi software moderni (RBT nel File System di Linux) su scale di dati critiche.
 \end{document}  
