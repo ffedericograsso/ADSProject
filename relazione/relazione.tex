@@ -58,7 +58,7 @@ Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del ca
 
 Queste proprietà garantiscono un'altezza massima di:
 $$h_{RBT} \leq 2\log_2(n+1)$$
-Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL.
+Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL, inoltre .
 \end{itemize}
 
 \section{Struttura del Progetto}
@@ -120,11 +120,12 @@ Dall'osservazione delle figure, si nota:
     \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio complessivo, pesano sul tempo complessivo.
 \end{itemize}
 
-Per quanto riguarda il confronto delle performance dei due laptop, si nota che il tempo mediano più alto del MacBook si aggira attorno ai $1,2 \cdot 10^{-5}$ secondi, mentre quello più alto dell'HP Pavilion si aggira attorno ai $4 \cdot 10^{-5}$ secondi. Un grande divario!
+Per quanto riguarda il confronto delle performance dei due laptop, si nota che il tempo mediano più alto del MacBook si aggira attorno ai $1,2 \cdot 10^{-5}$ secondi, mentre quello più alto dell'HP Pavilion si aggira attorno ai $4 \cdot 10^{-5}$ secondi. Questo divario di performance è dovuto sia alla differenza di potenza di RAM tra i due laptop, sia anche per via della differenza dei SO, dove il MacBook OS ottimizza lo scheduling dei processi, mentre l'HP Pavillion, con Linux, risente della frammentazione della memoria fisica e dell'overhead delle system call.
 
 
 \subsection{Grafico dell'analisi asintotica}
 Il grafico mostra, come il precedente, il comportamento delle tre strutture dati in seguito all'inserimento casuale di chiavi.
+
 
 \begin{figure}[htbp]
     \centering

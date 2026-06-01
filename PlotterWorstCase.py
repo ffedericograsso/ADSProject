@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 
 # Assicuriamo l'inclusione dei moduli della cartella principale
 sys.path.append(".")
-from Project import Project
+from project import Project
 
 # Modello lineare per il BST nel caso peggiore: T(n) = c * n
 def linear_theory(x, c):

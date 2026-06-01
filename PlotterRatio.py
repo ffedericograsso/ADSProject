@@ -88,6 +88,5 @@ class StandardPlotter:
         plt.show()
 
 if __name__ == "__main__":
-    # Assicurati di impostare il percorso corretto al file CSV con i tuoi dati reali
-    plotter = StandardPlotter("esperimenti_risultati/esperimenti_risultati_Mac1.csv")
+    plotter = StandardPlotter("esperimenti_risultati/esperimenti_risultati.csv")
     plotter.plot_time_complexity()
