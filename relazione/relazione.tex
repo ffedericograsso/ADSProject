@@ -60,13 +60,13 @@ L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Albe
 \section{Richiami Teorici}
 Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
 \begin{itemize}
-    \item \textbf{BST Semplice:} Il BST non impone alcun vincolo strutturale sulla forma dell'albero. Il costo di un inserimento è proporzionale alla lunghezza del cammino radice-foglia, ovvero all'altezza $h$. Con input casuale uniforme, l'altezza attesa è $h = \mathcal{O}(\log n)$, ma nel caso peggiore (input ordinato) l'albero degenera in una lista concatenata con $h = \mathcal{O}(n)$.
+    \item \textbf{BST Semplice:} Il BST non impone alcun vincolo strutturale sulla forma dell'albero. Il costo di un inserimento è proporzionale alla lunghezza del cammino radice-foglia, ovvero all'altezza $h$. Con input casuale uniforme, l'altezza attesa è $h = \mathcal{O}(\log n)$, ma nel caso peggiore (input ordinato) l'albero degenera in una lista concatenata con $h = \mathcal{O}(n)$, dove ciò si verifica esattamente quando la sequenza di chiavi fornite in ingresso è strettamente monotona. 
 
-    \item \textbf{Alberi AVL:} Gli alberi AVL mantengono un vincolo di bilanciamento stretto: per ogni nodo, la differenza di altezza tra il sotto-albero sinistro e destro (fattore di bilanciamento) deve essere al massimo 1 in valore assoluto. Questo garantisce un'altezza massima di circa:
+    \item \textbf{Alberi AVL:} Gli alberi AVL mantengono un vincolo di bilanciamento stretto: per ogni nodo, la differenza di altezza tra il sotto-albero sinistro e destro (fattore di bilanciamento) deve essere al massimo 1 in valore assoluto. Una singola operazione di rotazione ha un costo temporale  di $O(1)$, in quanto consiste nel semplice scambio di un numero costante di puntatori. Questo garantisce un'altezza massima di circa:
     $$h_{AVL} \leq 1.44 \log_2(n+2)$$
-    assicurando $\mathcal{O}(\log n)$ nel caso peggiore. Quando un inserimento viola il vincolo, vengono eseguite rotazioni (semplici o doppie) per ripristinare il bilanciamento. Si distinguono quattro casi: rotazione sinistra, rotazione destra, rotazione sinistra-destra e rotazione destra-sinistra.
+    assicurando $\mathcal{O}(\log n)$ nel caso peggiore. Quando un inserimento viola il vincolo, vengono eseguite rotazioni che risalgono l'intero cammino dal nuovo nodo fino alla radice (semplici o doppie) per ripristinare il bilanciamento. Si distinguono quattro casi: rotazione sinistra, rotazione destra, rotazione sinistra-destra e rotazione destra-sinistra. 
 
-    \item \textbf{Alberi Red-Black:} Gli alberi Red-Black associano a ogni nodo un colore (rosso o nero) e impongono le seguenti proprietà: 
+    \item \textbf{Alberi Red-Black:} Gli alberi Red-Black associano a ogni nodo un colore (rosso o nero) in cui si richiede l'aggiunta di un singolo bit di informazione per l'attributo di  questo colore colore e impongono le seguenti proprietà: 
     \begin{enumerate}
         \item Ogni nodo è rosso o nero
         \item La radice è nera
@@ -77,7 +77,7 @@ Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del ca
 
 Queste proprietà garantiscono un'altezza massima di:
 $$h_{RBT} \leq 2\log_2(n+1)$$
-Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL, inoltre .
+Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL. Infatti, garantisce al massimo 2 rotazioni, dove le restanti operazioni di bilanciamento sono ricolorazioni, che hanno un costo di $O(1)$, mantenendo così un costo $\mathcal{O}(\log n)$ anche nel caso peggiore.
 \end{itemize}
 
 \section{Struttura del Progetto}
@@ -170,7 +170,7 @@ Dall'osservazione delle figure, si nota:
 Anche qui, come nella coppia di grafici precedente, si nota un calo di performance notevole nell'esecuzione del progetto sul secondo laptop.
 
 \subsection{Grafico Rotazioni Cumulative}
-Per la stampa di questo grafico l'inserimento è stato limitato alle chiavi $[100, 500, 1000, 2500, 5000, 7500, 10000]$. Viene mostrato il costo strutturale rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di $N$ durante il popolamento casuale uniforme.
+Per la stampa di questo grafico l'inserimento è stato limitato alle chiavi $[100, 500, 1000, 2500, 5000, 7500, 10000]$. Viene mostrato il costo strutturale, rappresentato come numero totale cumulativo di rotazioni eseguite dalle tre strutture dati in funzione di N, durante l'inserimento di una sequenza di chiavi pre-ordinata.
 
 \begin{figure}[htbp]
     \centering
