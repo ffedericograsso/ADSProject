@@ -33,12 +33,12 @@
     \vspace{2cm} % Space between title and authors
     
     \noindent
-    \begin{minipage}[t]{0.4\textwidth}
+    \begin{minipage}[t]{0.49\textwidth}
         \centering
         {\large Londero Stefano \\ 172585}
     \end{minipage}
     \hfill
-    \begin{minipage}[t]{0.4\textwidth}
+    \begin{minipage}[t]{0.49\textwidth}
         \centering
         {\large Grasso Federico \\ 173731}
     \end{minipage}
@@ -55,59 +55,58 @@
 \newpage
 
 \section{Introduzione}
-L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), Alberi (AVL) e Red-Black (RB) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
+L'obiettivo del progetto è confrontare tra Alberi Binari di Ricerca (BST), AVL e Red-Black-Tree (RBT) il tempo medio di inserimento di una chiave quando l'albero contiene n chiavi e, ottenere per diversi valori di n, stime robuste dei tempi di esecuzione.
 
 \section{Richiami Teorici}
 Il costo dell'inserimento in un albero di ricerca dipende dalla lunghezza del cammino radice-foglia, ed è quindi proporzionale alla sua altezza $h$.
 \begin{itemize}
-    \item \textbf{BST Semplice:} Il BST non impone alcun vincolo strutturale sulla forma dell'albero. Il costo di un inserimento è proporzionale alla lunghezza del cammino radice-foglia, ovvero all'altezza $h$. Con input casuale uniforme, l'altezza attesa è $h = \mathcal{O}(\log n)$, ma nel caso peggiore (input ordinato) l'albero degenera in una lista concatenata con $h = \mathcal{O}(n)$, dove ciò si verifica esattamente quando la sequenza di chiavi fornite in ingresso è strettamente monotona. 
+    \item \textbf{BST Semplice:} Il BST non impone alcun vincolo strutturale sulla forma dell'albero. Con input casuale uniforme, l'altezza attesa è $h = \mathcal{O}(\log n)$, ma nel caso peggiore (input ordinato) l'albero degenera in una lista concatenata con $h = \mathcal{O}(n)$, dove ciò si verifica esattamente quando la sequenza di chiavi fornite in ingresso è strettamente crescente. 
 
     \item \textbf{Alberi AVL:} Gli alberi AVL mantengono un vincolo di bilanciamento stretto: per ogni nodo, la differenza di altezza tra il sotto-albero sinistro e destro (fattore di bilanciamento) deve essere al massimo 1 in valore assoluto. Una singola operazione di rotazione ha un costo temporale  di $O(1)$, in quanto consiste nel semplice scambio di un numero costante di puntatori. Questo garantisce un'altezza massima di circa:
     $$h_{AVL} \leq 1.44 \log_2(n+2)$$
-    assicurando $\mathcal{O}(\log n)$ nel caso peggiore. Quando un inserimento viola il vincolo, vengono eseguite rotazioni che risalgono l'intero cammino dal nuovo nodo fino alla radice (semplici o doppie) per ripristinare il bilanciamento. Si distinguono quattro casi: rotazione sinistra, rotazione destra, rotazione sinistra-destra e rotazione destra-sinistra. 
+    assicurando $\mathcal{O}(\log n)$ nel caso peggiore. Quando un inserimento viola il vincolo, vengono eseguite rotazioni (singole o doppie) che risalgono l'intero cammino dal nuovo nodo fino alla radice per ripristinare il bilanciamento. Si distinguono quattro casi: rotazione sinistra, rotazione destra, rotazione sinistra-destra e rotazione destra-sinistra. 
 
-    \item \textbf{Alberi Red-Black:} Gli alberi Red-Black associano a ogni nodo un colore (rosso o nero) in cui si richiede l'aggiunta di un singolo bit di informazione per l'attributo di  questo colore colore e impongono le seguenti proprietà: 
+    \item \textbf{Alberi Red-Black:} I Red-Black-Tree associano a ogni nodo un colore (rosso o nero) in cui si richiede l'aggiunta di un singolo bit di informazione per l'attributo di  questo colore e impongono le seguenti proprietà: 
     \begin{enumerate}
         \item Ogni nodo è rosso o nero
         \item La radice è nera
         \item Ogni foglia NIL è nera
         \item Un nodo rosso ha entrambi i figli neri (no due rossi consecutivi)
-        \item Per ogni nodo, tutti i cammini verso le foglie contengono lo stesso numero di nodi neri (*black-height*)
+        \item Per ogni nodo, tutti i cammini verso le foglie contengono lo stesso numero di nodi neri (altezza nera)
     \end{enumerate}
 
 Queste proprietà garantiscono un'altezza massima di:
 $$h_{RBT} \leq 2\log_2(n+1)$$
-Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL. Infatti, garantisce al massimo 2 rotazioni, dove le restanti operazioni di bilanciamento sono ricolorazioni, che hanno un costo di $O(1)$, mantenendo così un costo $\mathcal{O}(\log n)$ anche nel caso peggiore.
+Il vantaggio principale dei RBT rispetto agli AVL è che molte violazioni dopo un inserimento si risolvono tramite ricolorazioni, operazioni puramente logiche senza spostamento di nodi, rendendo le rotazioni meno frequenti rispetto all'AVL. Infatti, garantisce al massimo 2 rotazioni, dove le restanti operazioni di bilanciamento sono ricolorazioni, che hanno un costo di $\mathcal{O}(1)$, mantenendo così un costo $\mathcal{O}(\log n)$ anche nel caso peggiore.
 \end{itemize}
 
 \section{Struttura del Progetto}
 Il progetto è stato strutturato nel seguente modo, seguendo un'ottica di programmazione ad oggetti:
 \begin{itemize}
-    \item \textbf{Codici delle Strutture Dati}: I file \texttt{BST.py}, \texttt{AVL.py} e \texttt{RBT.py} contengono i codici completi delle strutture dati. In particolare nei codici delle ultime due strutture dati il codice è stato alleggerito riciclando alcune parti del codice da \texttt{BST.py}.
+    \item \textbf{Codici delle Strutture Dati}: I file \texttt{BST.py}, \texttt{AVL.py} e \texttt{RBT.py} contengono i codici completi delle strutture dati. In particolare nei codici delle ultime due strutture dati il codice è stato alleggerito riciclando alcune parti del codice da \texttt{BST.py}, sfruttando l'\textit{ereditarietà}.
     \item \textbf{KeyManager}: Questo file implementa la gestione controllata delle chiavi tramite il partizionamento di un array, garantendo la selezione di chiavi esterne all'albero e occupate (interne) in un tempo $\mathcal{O}(1)$.
     \item \textbf{Project}: Il file \texttt{Project.py} segue il Design Pattern \textit{Factory}, utilizzato nella programmazione ad oggetti. Questo file consente di configurare comodamente il tipo di albero tramite stringhe identificative ("BST", "AVL", "RBT").
     \item \textbf{Experiment Setup \& Runner}: \texttt{ExperimentSetup.py} genera la sequenza di dimensioni $N$ basata su una progressione geometrica di valori di $n$ da testare (da 1000 a 10.000.000 elementi) e si occupa del riempimento iniziale dell'albero. Mentre \texttt{ExperimentRunner.py} implementa l'effettivo ciclo di misurazione e calcolando la mediana finale.
 \end{itemize}
 
 \section{Algoritmo}
-Per ciascun valore di $n$ identificato dalla progressione geometrica, e per ogni struttura dati analizzata, il processo di misurazione si articola rigorosamente nei seguenti passi:
+Per ciascun valore di $n$ identificato dalla progressione geometrica, e per ogni struttura dati analizzata, il processo di misurazione si articola nei seguenti passi:
 
 \begin{enumerate}
     \item \textbf{Inizializzazione}: Viene istanziato un albero inizialmente vuoto (BST, AVL o RBT).
     
     \item \textbf{Popolazione iniziale}: Sfruttando \texttt{KeyManager}, l'albero viene popolato inserendo $n$ chiavi estratte casualmente dall'insieme globale. Al termine di questa fase, l'albero raggiunge l'esatta dimensione $n$, lasciando nel compartimento dell'array una sola chiave disponibile e non ancora utilizzata.
     
-    \item \textbf{Ciclo di misurazione}: Viene avviato un blocco ripetuto di 10 iterazioni (configurabile). Ciascuna iterazione esegue in sequenza le seguenti operazioni:
+    \item \textbf{Ciclo di misurazione}: Viene avviato un blocco ripetuto di 10 iterazioni. Ciascuna iterazione esegue in sequenza le seguenti operazioni:
     \begin{enumerate}
         \item \textbf{Selezione ed Inserimento Cronometrato}: Viene prelevata l'unica chiave disponibile rimasta esclusa dall'albero e si misura in modo isolato il solo tempo di esecuzione dell'operazione \texttt{insert(k)} tramite la funzione di sistema \texttt{time.perf\_counter()}. In questo istante la dimensione dell'albero sale temporaneamente a $n+1$.
         
         \item \textbf{Rimozione ed Espulsione Silenziosa}: Si sceglie in modo puramente casuale una delle chiavi attualmente presenti all'interno dell'albero e la si rimuove tramite l'operazione \texttt{remove()} \textit{senza cronometrare} l'esecuzione.
     \end{enumerate}
 
-    \item \textbf{Calcolo della statistica robusta}: Al termine delle 10 iterazioni, l'insieme dei tempi campionati viene aggregato calcolandone la mediana. Questo valore finale viene registrato come stima robusta delle prestazioni di inserimento per la dimensione $n$ corrente.
+    \item \textbf{Calcolo della statistica robusta}: Al termine delle 10 iterazioni, l'insieme dei tempi campionati viene aggregato calcolandone la mediana. Questo valore finale viene registrato come stima delle prestazioni di inserimento per la dimensione $n$ corrente.
 \end{enumerate}
-
-Questa specifica tecnica a coppie di \textit{insert-remove} garantisce il soddisfacimento simultaneo di due requisiti sperimentali critici:
+Questa specifica tecnica a coppie di \textit{insert-remove} soddisfa due requisiti critici:
 \begin{itemize}
     \item \textbf{Dimensione Controllata}: Poiché l'eliminazione compensa esattamente l'inserimento precedente, viene garantito che prima di far partire il cronometro al giro successivo l'albero ritorni ad avere esattamente $n$ chiavi.
     \item \textbf{Varietà Morfologica}: La continua espulsione e reinserimento di chiavi casuali altera costantemente e dinamicamente la topologia dei rami, modificando la struttura. In questo modo, le misurazioni avvengono su una famiglia di alberi le cui forme sono uniformemente distribuite nello spazio degli alberi possibili di dimensione $n$, evitando casi degeneri.
@@ -136,10 +135,10 @@ L'asse delle ascisse esprime la dimensione $N$ dell'albero sfruttando una scala 
 Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Stabilità di BST e RBT}: Le progressioni relative a BST e RBT risultano costantemente schiacciate verso il basso lungo l'intero esperimento, denotando un'elevatissima efficienza d'esecuzione.
-    \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio complessivo, pesano sul tempo complessivo.
+    \item \textbf{Inefficienza dell'AVL}: Di contro, la progressione associata all'albero AVL si distacca in modo netto spingendo visibilmente verso l'alto all'aumentare di $N$. Il vincolo di bilanciamento imposto dall'AVL (differenza di altezza massima pari a 1) si rivela estremamente inefficiente quando l'albero si fa altamente complesso. Ogni singola operazione innesca una catena di controlli e rotazioni correttive che, nel bilancio, pesano sul tempo complessivo.
 \end{itemize}
 
-Per quanto riguarda il confronto delle performance dei due laptop, si nota che il tempo mediano più alto del MacBook si aggira attorno ai $1,2 \cdot 10^{-5}$ secondi, mentre quello più alto dell'HP Pavilion si aggira attorno ai $4 \cdot 10^{-5}$ secondi. Questo divario di performance è dovuto sia alla differenza di potenza di RAM tra i due laptop, sia anche per via della differenza dei SO, dove il MacBook OS ottimizza lo scheduling dei processi, mentre l'HP Pavillion, con Linux, risente della frammentazione della memoria fisica e dell'overhead delle system call.
+Per quanto riguarda il confronto delle performance dei due laptop, si nota che il tempo mediano più alto del MacBook si aggira attorno ai $1,2 \cdot 10^{-5}$ secondi, mentre quello più alto dell'HP Pavilion si aggira attorno ai $4 \cdot 10^{-5}$ secondi. Questo divario di performance è dovuto sia alla differenza di RAM tra i due laptop, sia anche per via della differenza dei SO, dove il MacOS ottimizza lo scheduling dei processi, mentre l'HP Pavilion, con Linux, risente della frammentazione della memoria fisica e dell'overhead delle system call.
 
 
 \subsection{Grafico dell'analisi asintotica}
@@ -158,13 +157,13 @@ Il grafico mostra, come il precedente, il comportamento delle tre strutture dati
     \caption*{Misurazioni HP Pavilion}
 \end{figure}
 
-Il secondo grafico mantiene le stesse misurazioni del precedente, ma cambia la scala dell'asse delle ascisse: da logaritmica a lineare, con valori fino a $10^7$. Questo cambio di prospettiva permette di osservare il comportamento asintotico delle strutture dati, ovvero come i tempi si stabilizzano al crescere di N.
+Il secondo grafico mantiene le stesse misurazioni del precedente, ma cambia la scala dell'asse delle ascisse: da logaritmica a lineare, con valori fino a $1,0 \cdot 10^7$. Questo cambio di prospettiva permette di osservare il comportamento asintotico delle strutture dati, ovvero come i tempi si stabilizzano al crescere di N.
 Una complessità $\mathcal{O}(\log n)$ su scala lineare produce una curva che cresce rapidamente per valori piccoli di N, per poi "appiattirsi" progressivamente. Questo è esattamente ciò che si osserva per BST e RBT, le cui curve convergono verso un andamento orizzontale. L'AVL invece, pur stabilizzandosi anch'esso, lo fa su un valore significativamente più alto rispetto alle altre due strutture, confermando il peso costante delle rotazioni di riequilibrio.
 
 Dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Convergenza di BST e RBT}: Le curve di BST e RBT crescono inizialmente poco per poi "spianare", stabilizzandosi in modo netto su un andamento orizzontale sui grandi valori di $N$.
-    \item \textbf{Divergenza dell'AVL}: Si nota invece che la progressione associata all'albero AVL, inizialmente sale molto più velocemente rispetto alle altre due strutture dati, per poi stabilizzarsi attorno a $1,1 \cdot 10^{-5}$ secondi. Questo dimostra graficamente che i vincoli dell'AVL rendono più difficile l'efficientamento.
+    \item \textbf{Divergenza dell'AVL}: Si nota invece che la progressione associata all'albero AVL, inizialmente sale molto più velocemente rispetto alle altre due strutture dati, per poi stabilizzarsi attorno a $1,1 \cdot 10^{-5}$ secondi per il MacBook e $3,5 \cdot 10^{-5}$ per l'HP. Questo dimostra graficamente che i vincoli dell'AVL rendono più difficile l'efficientamento.
 \end{itemize}
 
 Anche qui, come nella coppia di grafici precedente, si nota un calo di performance notevole nell'esecuzione del progetto sul secondo laptop.
@@ -180,7 +179,7 @@ Per la stampa di questo grafico l'inserimento è stato limitato alle chiavi $[10
 Dall'osservazione della figura, si nota:
 \begin{itemize}
     \item \textbf{Assenza di rotazioni nel BST}: La progressione del BST rimane costantemente ancorata allo zero per tutta la durata del test. L'algoritmo non esegue alcuna rotazione, confermando l'assenza totale di manutenzione nel caso medio.
-    \item \textbf{Costo di bilanciamento dell'AVL rispetto al RBT}: L'albero AVL mostra una pendenza superiore rispetto alla variante Red-Black. A causa del vincolo sulle altezze, ogni operazione di inserimento ha un'alta probabilità di innescare riequilibri. Al contrario, l'albero Red-Black gestisce gran parte delle violazioni strutturali tramite la ricolorazione logica dei nodi (operazione molto più leggera per la CPU), ricorrendo alle rotazioni dei nodi con una frequenza inferiore.
+    \item \textbf{Costo di bilanciamento dell'AVL rispetto al RBT}: L'albero AVL mostra una pendenza superiore rispetto alla variante Red-Black. A causa del vincolo sulle altezze, ogni operazione di inserimento ha un'alta probabilità di innescare riequilibri. Al contrario, l'albero Red-Black gestisce gran parte delle violazioni strutturali tramite la ricolorazione dei nodi (operazione molto più leggera per la CPU), ricorrendo alle rotazioni dei nodi con una frequenza inferiore.
 \end{itemize}
 
 \clearpage
@@ -199,10 +198,10 @@ Per la stampa di questo grafico, come per il precedente, l'inserimento è stato 
     \caption*{Misurazioni HP Pavilion}
 \end{figure}
 
-Qui i due grafici sono più simili tra loro rispetto alla prima coppia, con il primo rimanendo comunque sempre più stabile. Nel secondo grafico si nota che all'inserimento del nodo $5000$ si presenta un rallentamento che esce dall'andamento generale delle misurazioni. In generale, dall'osservazione delle figure, si nota:
+Qui i due grafici sono più simili tra loro rispetto alla prima coppia, con il primo rimanendo comunque sempre più stabile. Nel secondo grafico si nota che all'inserimento del nodo $2500$ si presenta un rallentamento che esce dall'andamento generale delle misurazioni. In generale, dall'osservazione delle figure, si nota:
 \begin{itemize}
     \item \textbf{Collasso prestazionale del BST}: La progressione del BST devia con una pendenza marcatamente lineare verso l'alto fin da subito. Privo di logiche di riequilibrio, l'albero subisce passivamente l'ordinamento dell'input inserendo ogni chiave come figlio destro della precedente. La struttura degenera a tutti gli effetti in una lista concatenata, portando l'altezza a $h = \mathcal{O}(n)$, confermando il limite della struttura dati non bilanciata.
-    \item \textbf{Resilienza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come l'RBT si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni.
+    \item \textbf{Resistenza strutturale di AVL e RBT}: Al contrario, le progressioni di AVL e RBT rimangono schiacciate a ridosso dello zero. Entrambe le strutture intercettano lo sbilanciamento attivando le rotazioni dei nodi, preservando l'efficienza asintotica logaritmica $\mathcal{O}(\log n)$ anche a fronte del peggior input possibile. Il confronto mostra come l'RBT si mantenga leggermente più efficiente dell'AVL grazie alla minore complessità delle operazioni di ricolorazione rispetto alle rotazioni.
 \end{itemize}
 
 \section{Conclusioni}
@@ -215,5 +214,5 @@ Le misurazioni effettuate evidenziano come la scelta della struttura dati ottima
     \item L'\textbf{Albero Red-Black} si è dimostrato il miglior compromesso complessivo. Riuscendo a controllare lo sbilanciamento meglio rispetto all'AVL, riducendo il ricorso alle rotazioni dei nodi, risolvendo gran parte delle violazioni tramite ricolorazioni rosso-nere. Questa flessibilità consente di mantenere prestazioni ottime sia nel caso medio che di fronte a input degeneri, confermandolo come la struttura più robusta e versatile per scopi generali.
 \end{itemize}
 
-In conclusione, l'analisi ha confermato che i meccanismi di bilanciamento automatico rappresentano un vero e proprio "salvagente" dal punto di vista della complessità: pur introducendo un costo di manutenzione (evidente nell'AVL), essi salvano dalle degenerazioni a $\mathcal{O}(n)$ nel caso pessimo, garantendo una sicurezza permettendo l'utilizzo nei sistemi software moderni (RBT nel File System di Linux) su scale di dati critiche.
+In conclusione, l'analisi ha confermato che i meccanismi di bilanciamento rappresentano un vero e proprio "salvagente" dal punto di vista della complessità: pur introducendo un costo di manutenzione (evidente nell'AVL), essi salvano dalle degenerazioni a $\mathcal{O}(n)$ nel caso pessimo, garantendo una sicurezza permettendo l'utilizzo nei sistemi software moderni (RBT nel File System di Linux) su scale di dati critiche.
 \end{document}  
