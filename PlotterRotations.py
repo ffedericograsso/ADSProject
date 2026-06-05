@@ -3,7 +3,7 @@ import sys
 import random
 
 sys.path.append(".")
-from project import Project
+from Project import Project
 
 def run_rotations_benchmark():
     # Valori di N per cui calcolare il numero di rotazioni
@@ -17,27 +17,27 @@ def run_rotations_benchmark():
     for struct_name in structures:
         print(f"Contando le rotazioni per {struct_name}...")
         for n in N_values:
-            # Creiamo l'albero e la factory dei nodi
+            # Creazione l'albero e la factory dei nodi
             project = Project(struct_name, n)
             tree = project.tree
             
-            # Inietta e forza l'inizializzazione del contatore a 0 per ogni albero
+            # Inizializzazione del contatore a 0 per ogni albero
             tree.rotation_count = 0
             
-            # Generiamo chiavi casuali per simulare il caso medio
+            # Generazione chiavi casuali per caso medio
             keys = list(range(n))
             random.shuffle(keys)
             
-            # Popoliamo l'albero creando PRIMA il nodo (Fix dell'errore)
+            # Popolamento albero creando prima il nodo
             for key in keys:
                 node = project.create_node(key)
                 tree.insert(node)
                 
-            # Recuperiamo il numero di rotazioni effettuate
+            # Recupero numero rotazioni effettuate
             rotations = getattr(tree, 'rotation_count', 0)
             results[struct_name].append(rotations)
             
-    # --- Generazione del Grafico ---
+    # Generazione del Grafico 
     plt.figure(figsize=(10, 6))
     color_map = {"BST": "blue", "AVL": "orange", "RBT": "red"}
     

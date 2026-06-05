@@ -40,11 +40,11 @@ class StandardPlotter:
 
         for tree_name, data in self.results.items():
             if len(data["X"]) > 0:
-                # Convertiamo in array numpy per i calcoli matematici
+                # Conversione in array numpy
                 x_data = np.array(data["X"])
                 y_data = np.array(data["Y"])
                 
-                # 1. Plottiamo i dati reali misurati (i punti discreti con linea continua sottile)
+                # 1. Plot dei dati reali misurati (i punti discreti con linea continua)
                 plt.plot(
                     x_data, 
                     y_data, 
@@ -56,16 +56,16 @@ class StandardPlotter:
                     color=color_map[tree_name]
                 )
                 
-                # 2. CALCOLO DELLA CURVA TEORICA INTERPOLATA (FITTING)
+                # 2. CALCOLO DELLA CURVA TEORICA (FITTING)
                 # Calcola il coefficiente 'c' ottimale che minimizza lo scarto tra la teoria e i tuoi dati
                 popt, _ = curve_fit(log_theory, x_data, y_data)
                 c_ottimale = popt[0]
                 
-                # Generiamo un range denso di punti per disegnare una curva logaritmica fluida e continua
+                # Genera un range denso di punti per disegnare una curva logaritmica
                 x_smooth = np.linspace(x_data.min(), x_data.max(), 500)
                 y_theory = log_theory(x_smooth, c_ottimale)
                 
-                # 3. Plottiamo la curva logaritmica teorica corrispondente (linea tratteggiata più spessa)
+                # 3. Plot della curva logaritmica teorica corrispondente (linea tratteggiata)
                 plt.plot(
                     x_smooth, 
                     y_theory, 

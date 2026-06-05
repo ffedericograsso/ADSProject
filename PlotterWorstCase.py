@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 
 # Assicuriamo l'inclusione dei moduli della cartella principale
 sys.path.append(".")
-from project import Project
+from Project import Project
 
 # Modello lineare per il BST nel caso peggiore: T(n) = c * n
 def linear_theory(x, c):
@@ -17,13 +17,11 @@ def log_theory(x, c):
     return c * np.log2(x)
 
 def run_real_worst_case():
-    # Valori di N controllati per mostrare la crescita lineare del BST senza piantare la CPU
+    # Valori di N controllati
     N_values = [100, 500, 1000, 2500, 5000, 7500, 10000]
     
     structures = ["BST", "AVL", "RBT"]
     results = {struct: [] for struct in structures}
-    
-    print("Avvio benchmark del CASO PESSIMO VERO (Input ordinato sequenzialmente)...")
     
     for struct_name in structures:
         print(f"Esecuzione su struttura: {struct_name}...")
@@ -31,7 +29,7 @@ def run_real_worst_case():
             # Creazione di elementi già perfettamente ordinati crescenti
             ordered_keys = list(range(n))
             
-            # Istanziamo la struttura tramite la Factory del vostro progetto
+            # Istanziamento la struttura tramite la Factory del vostro progetto
             project = Project(struct_name, n)
             tree = project.tree
             
@@ -40,7 +38,7 @@ def run_real_worst_case():
                 node = project.create_node(ordered_keys[i])
                 tree.insert(node)
                 
-            # Misuriamo millimetricamente l'inserimento dell'ennesimo elemento degenere
+            # Misuriamo l'inserimento dell'ennesimo elemento degenere
             target_key = ordered_keys[-1]
             target_node = project.create_node(target_key)
             
@@ -58,7 +56,7 @@ def run_real_worst_case():
         x_data = np.array(N_values)
         y_data = np.array(results[struct_name])
         
-        # 1. Plottiamo i dati sperimentali reali
+        # 1. Plot dati sperimentali reali
         plt.plot(
             x_data, 
             y_data, 
@@ -81,7 +79,7 @@ def run_real_worst_case():
             popt, _ = curve_fit(log_theory, x_data, y_data)
             y_theory = log_theory(x_smooth, popt[0])
             
-        # 3. Plottiamo la linea di regressione teorica corrispondente
+        # 3. Plot linea di regressione teorica corrispondente
         plt.plot(
             x_smooth, 
             y_theory, 
@@ -97,8 +95,6 @@ def run_real_worst_case():
     plt.grid(True, which="both", ls="--", alpha=0.5)
     plt.legend(fontsize=10, loc="upper left")
     plt.tight_layout()
-    
-    # Salvataggio dell'immagine per la relazione LaTeX
     plt.savefig("grafico_caso_pessimo.png", dpi=300)
     print("\n=> Grafico del caso pessimo con regressioni salvato come 'grafico_caso_pessimo_reale.png'!")
     plt.show()

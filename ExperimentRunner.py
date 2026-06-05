@@ -4,7 +4,7 @@ import statistics
 import csv
 import gc
 from ExperimentSetup import ExperimentSetup
-from project import Project
+from Project import Project
 
 # Runner dell'esperimento
 class ExperimentRunner:
