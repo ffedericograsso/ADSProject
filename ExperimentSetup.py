@@ -2,7 +2,6 @@ import math
 from KeyManager import KeyManager
 from Project import Project
 
-# Setup dell'esperimento
 class ExperimentSetup:
 	def __init__(self, min_n=1000, max_n=10000000, steps=100):
 		self.min_n = min_n
@@ -19,7 +18,7 @@ class ExperimentSetup:
 		if self.steps <= 1:
 			return [self.min_n]
 		
-		# Calcolo della progressione geometrica
+		# Progressione geometrica
 		c = (self.max_n / self.min_n) ** (1 / (self.steps - 1))
 
 		for i in range(self.steps):
@@ -36,7 +35,6 @@ class ExperimentSetup:
 
 		key_manager = KeyManager(project.n)
 
-		# Popolazione iniziale
 		for _ in range(project.n):
 			random_key = key_manager.get_key_insert()
 			node_to_insert = project.create_node(random_key)
